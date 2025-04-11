@@ -14,9 +14,9 @@ import {DOCUMENT, isPlatformBrowser} from "@angular/common";
 import {TranslocoPipe} from "@jsverse/transloco";
 import {environment} from "../environments/environment";
 import {TitleService} from "./services/title.service";
-import {LeftMenuComponent} from "./components/left-menu/left-menu.component";
-import {FooterComponent} from "./components/footer/footer.component";
-import {TopMenuComponent} from "./components/top-menu/top-menu.component";
+import {LeftMenuComponent} from "./root/components/left-menu/left-menu.component";
+import {FooterComponent} from "./root/components/footer/footer.component";
+import {TopMenuComponent} from "./root/components/top-menu/top-menu.component";
 
 @Component({
   selector: 'app-root',

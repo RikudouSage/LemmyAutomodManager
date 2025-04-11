@@ -7,7 +7,8 @@ import {provideHttpClient, withFetch} from '@angular/common/http';
 import {TranslocoHttpLoader} from './transloco-loader';
 import {provideTransloco} from '@jsverse/transloco';
 import {translocoMarkupRouterLinkRenderer} from "ngx-transloco-markup-router-link";
-import {defaultTranslocoMarkupTranspilers} from "ngx-transloco-markup";
+import {defaultTranslocoMarkupTranspilers, provideTranslationMarkupTranspiler} from "ngx-transloco-markup";
+import {ParagraphTranslocoTranspiler} from "./services/transloco-transpiler/paragraph-transloco.transpiler";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +20,7 @@ export const appConfig: ApplicationConfig = {
       config: {
         availableLangs: ['en'],
         defaultLang: 'en',
+        fallbackLang: 'en',
         // reRenderOnLangChange: true,
         prodMode: !isDevMode(),
         missingHandler: {
@@ -30,5 +32,6 @@ export const appConfig: ApplicationConfig = {
     }),
     defaultTranslocoMarkupTranspilers(),
     translocoMarkupRouterLinkRenderer(),
+    provideTranslationMarkupTranspiler(ParagraphTranslocoTranspiler),
   ]
 };

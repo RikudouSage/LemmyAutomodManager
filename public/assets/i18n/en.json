@@ -1,5 +1,8 @@
 {
   "app.version": "Version: {{appVersion}}",
   "app.home": "Home",
-  "app.ban_regexes": "Ban regexes"
+  "app.ban_regexes.name": "Ban regexes",
+  "app.welcome_text": "[p]This is a UI manager for the [link:sourceLink]Lemmy Automod by RikudouSage[/link]. [b]It should never be accessible over the internet, make sure you're accessing it over an internal network, you have basic auth in front etc.[/b][/p][p]Please choose the item you want to configure from the left menu. The changes you do here will take effect immediately.[/p]",
+  "app.description": "Description",
+  "app.ban_regexes.description": "The regexes specified here are checked when a post or comment gets created or updated, the fields checked are: post title, post body, post url, author name and author display name for posts, comment content and author name and display name for comments."
 }

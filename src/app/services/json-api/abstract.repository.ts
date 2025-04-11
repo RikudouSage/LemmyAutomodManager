@@ -69,8 +69,8 @@ interface FetchConfig {
   providedIn: 'root',
 })
 export abstract class AbstractRepository<T extends AbstractEntity> {
-  abstract resource: typeof AbstractEntity;
-  abstract type: string;
+  public abstract resource: typeof AbstractEntity;
+  public abstract type: string;
 
   protected useCache = false;
   protected cacheValidity: Seconds = 10;
