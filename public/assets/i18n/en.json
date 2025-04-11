@@ -1,3 +1,5 @@
 {
-  "app.version": "Version: {{appVersion}}"
+  "app.version": "Version: {{appVersion}}",
+  "app.home": "Home",
+  "app.ban_regexes": "Ban regexes"
 }
