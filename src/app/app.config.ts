@@ -6,6 +6,8 @@ import {provideClientHydration} from '@angular/platform-browser';
 import {provideHttpClient, withFetch} from '@angular/common/http';
 import {TranslocoHttpLoader} from './transloco-loader';
 import {provideTransloco} from '@jsverse/transloco';
+import {translocoMarkupRouterLinkRenderer} from "ngx-transloco-markup-router-link";
+import {defaultTranslocoMarkupTranspilers} from "ngx-transloco-markup";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,11 +19,16 @@ export const appConfig: ApplicationConfig = {
       config: {
         availableLangs: ['en'],
         defaultLang: 'en',
-        // Remove this option if your application doesn't support changing language in runtime.
-        reRenderOnLangChange: true,
+        // reRenderOnLangChange: true,
         prodMode: !isDevMode(),
+        missingHandler: {
+          allowEmpty: true,
+          useFallbackTranslation: true,
+        }
       },
-      loader: TranslocoHttpLoader
+      loader: TranslocoHttpLoader,
     }),
+    defaultTranslocoMarkupTranspilers(),
+    translocoMarkupRouterLinkRenderer(),
   ]
 };
