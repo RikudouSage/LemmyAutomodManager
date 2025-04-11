@@ -1,11 +1,27 @@
 <div class="row">
   <div class="col-md-12">
+
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">{{'app.description' | transloco}}</h3>
       </div>
       <div class="card-body">
         <transloco key="app.ban_regexes.description" />
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">{{'app.items' | transloco}} ({{totalCount() | formatNumber}})</h3>
+      </div>
+      <div class="card-body">
+        <app-data-list-table
+          [repository]="repository"
+          identifierField="id"
+          detailUrl="/ban-regexes/detail/%value%"
+
+          (totalCountResolved)="totalCount.set($event)"
+        />
       </div>
     </div>
   </div>

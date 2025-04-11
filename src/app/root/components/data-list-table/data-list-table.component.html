@@ -1,0 +1,36 @@
+@if (loading()) {
+  <app-loader/>
+} @else {
+  <table class="table table-striped">
+    <tr>
+      @for (header of headers(); track header) {
+        <th>
+          {{ allColumnNames()[header] ?? header }}
+        </th>
+      }
+    </tr>
+
+    @for (item of items(); track item.id) {
+      <tr>
+        @for (header of headers(); track header) {
+          @let link = header === identifierField() ? detailUrl().replace('%value%', header === 'id' ? item.id : $any(item.attributes)[header]) : null;
+          <td>
+            @if (header === "id") {
+              @if (link) {
+                <a [routerLink]="link">{{item.id}}</a>
+              } @else {
+                {{item.id | displayDatabaseValue}}
+              }
+            } @else {
+              @if (link) {
+                <a [routerLink]="link">{{$any(item.attributes)[header]}}</a>
+              } @else {
+                {{$any(item.attributes)[header] | displayDatabaseValue}}
+              }
+            }
+          </td>
+        }
+      </tr>
+    }
+  </table>
+}
