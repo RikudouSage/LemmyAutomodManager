@@ -1,3 +1,15 @@
 @import "styles/adminlte.css";
 @import "styles/dark.css";
 @import "styles/font-awesome.css";
+
+@import "ngx-toastr/toastr";
+
+input, textarea {
+  &.ng-invalid.ng-dirty {
+    border: 1px solid red !important;
+
+    &:focus {
+      border-color: darken(red, 20%) !important;
+    }
+  }
+}

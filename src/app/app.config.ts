@@ -9,9 +9,12 @@ import {provideTransloco} from '@jsverse/transloco';
 import {translocoMarkupRouterLinkRenderer} from "ngx-transloco-markup-router-link";
 import {defaultTranslocoMarkupTranspilers, provideTranslationMarkupTranspiler} from "ngx-transloco-markup";
 import {ParagraphTranslocoTranspiler} from "./services/transloco-transpiler/paragraph-transloco.transpiler";
+import {provideAnimations} from "@angular/platform-browser/animations";
+import {provideToastr} from "ngx-toastr";
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimations(),
     provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(routes),
     provideClientHydration(),
@@ -33,5 +36,13 @@ export const appConfig: ApplicationConfig = {
     defaultTranslocoMarkupTranspilers(),
     translocoMarkupRouterLinkRenderer(),
     provideTranslationMarkupTranspiler(ParagraphTranslocoTranspiler),
+    provideToastr({
+      maxOpened: 3,
+      autoDismiss: true,
+      timeOut: 10_000,
+      closeButton: true,
+      progressBar: true,
+      enableHtml: true,
+    }),
   ]
 };

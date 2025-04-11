@@ -1,15 +1,35 @@
 {
   "app.version": "Version: {{appVersion}}",
   "app.home": "Home",
-  "app.ban_regexes.name": "Ban regexes",
   "app.welcome_text": "[p]This is a UI manager for the [link:sourceLink]Lemmy Automod by RikudouSage[/link]. [b]It should never be accessible over the internet, make sure you're accessing it over an internal network, you have basic auth in front etc.[/b][/p][p]Please choose the item you want to configure from the left menu. The changes you do here will take effect immediately.[/p]",
   "app.description": "Description",
-  "app.ban_regexes.description": "The regexes specified here are checked when a post or comment gets created or updated, the fields checked are: post title, post body, post url, author name and author display name for posts, comment content and author name and display name for comments.",
   "app.items": "Items",
+  "app.add_new": "Add new",
+  "app.save": "Save",
+  "app.remove": "Remove",
+
+  "app.error": "Error",
+  "app.error.invalid_form": "The form is not valid.",
+  "app.error.failed_saving": "There was an error while saving the item, please try again later.",
+  "app.error.failed_removing": "There was an error while removing the item, please try again later.",
+
+  "app.success": "Success",
+  "app.success.item_created": "The item was successfully created.",
+  "app.success.item_updated": "The item was successfully updated.",
+  "app.success.item_removed": "The item was successfully removed.",
 
   "app.column.id": "ID",
   "app.column.regex": "Regex",
+  "app.column.regex.description": "The regex that will be used to do the matching. It follows the PHP (PCRE2) rules and is always case insensitive. You can use [link:regex101]regex101.com[/link] for syntax highlighting.",
   "app.column.reason": "Reason",
+  "app.column.reason.description": "The content of this field will be sent to Lemmy as the reason and will be visible in the Modlog",
   "app.column.enabled": "Enabled",
-  "app.column.remove_all": "Remove all"
+  "app.column.enabled.description": "Whether this rule is enabled or not, disabled rules are skipped entirely.",
+  "app.column.remove_all": "Remove all",
+  "app.column.remove_all.description": "When enabled, all posts and comments by the user will be removed as well. If unchecked, only the offending post/comment will be removed in addition to the user being banned.",
+
+  "app.ban_regexes.name": "Ban regexes",
+  "app.ban_regexes.description": "The regexes specified here are checked when a post or comment gets created or updated, the fields checked are: post title, post body, post url, author name and author display name for posts, comment content and author name and display name for comments.",
+  "app.ban_regexes.edit.title": "Edit ban regex with id '{{id}}'",
+  "app.ban_regexes.add.title": "Add a new ban regex"
 }

@@ -7,6 +7,7 @@ import {TranslocoMarkupComponent} from "ngx-transloco-markup";
 import {DataListTableComponent} from "../../../root/components/data-list-table/data-list-table.component";
 import {InstanceBanRegexRepository} from "../../../entity/instance-ban-regex.entity";
 import {FormatNumberPipe} from "../../../pipes/format-number.pipe";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-ban-regexes-list',
@@ -15,7 +16,8 @@ import {FormatNumberPipe} from "../../../pipes/format-number.pipe";
     TranslocoPipe,
     TranslocoMarkupComponent,
     DataListTableComponent,
-    FormatNumberPipe
+    FormatNumberPipe,
+    RouterLink
   ],
   templateUrl: './ban-regexes-list.component.html',
   styleUrl: './ban-regexes-list.component.scss'

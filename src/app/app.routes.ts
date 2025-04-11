@@ -13,4 +13,8 @@ export const routes: Routes = [
     path: 'ban-regexes/detail/:id',
     loadComponent: () => import('./ban-regexes/pages/ban-regexes-detail/ban-regexes-detail.component').then(m => m.BanRegexesDetailComponent),
   },
+  {
+    path: 'ban-regexes/add',
+    loadComponent: () => import('./ban-regexes/pages/ban-regexes-detail/ban-regexes-detail.component').then(m => m.BanRegexesDetailComponent),
+  },
 ];

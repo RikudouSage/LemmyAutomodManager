@@ -1,0 +1,19 @@
+<div
+  class="custom-control custom-switch"
+  [class.custom-switch-on-success]="onColor() === Color.Success"
+  [class.custom-switch-on-danger]="onColor() === Color.Danger"
+  [class.custom-switch-on-warning]="onColor() === Color.Warning"
+  [class.custom-switch-on-primary]="onColor() === Color.Primary"
+  [class.custom-switch-on-info]="onColor() === Color.Info"
+  [class.custom-switch-on-secondary]="onColor() === Color.Secondary"
+
+  [class.custom-switch-off-success]="offColor() === Color.Success"
+  [class.custom-switch-off-danger]="offColor() === Color.Danger"
+  [class.custom-switch-off-warning]="offColor() === Color.Warning"
+  [class.custom-switch-off-primary]="offColor() === Color.Primary"
+  [class.custom-switch-off-info]="offColor() === Color.Info"
+  [class.custom-switch-off-secondary]="offColor() === Color.Secondary"
+>
+  <input class="custom-control-input" type="checkbox" id="{{controlId}}" [checked]="value()" (change)="value.set(self.checked)" #self [disabled]="isDisabled()"/>
+  <label for="{{controlId}}" class="custom-control-label">{{ label() | toObservable | async }}</label>
+</div>

@@ -11,8 +11,9 @@
     </div>
 
     <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">{{'app.items' | transloco}} ({{totalCount() | formatNumber}})</h3>
+      <div class="card-header d-flex justify-content-between">
+        <h3 class="card-title flex-grow-1">{{'app.items' | transloco}} ({{totalCount() | formatNumber}})</h3>
+        <div class="flex-grow-0"><a routerLink="/ban-regexes/add">{{'app.add_new' | transloco}}</a></div>
       </div>
       <div class="card-body">
         <app-data-list-table
