@@ -6,7 +6,7 @@ import {tap} from "rxjs";
 import {map} from "rxjs/operators";
 import {LoaderComponent} from "../loader/loader.component";
 import {TranslatorService} from "../../../services/translator.service";
-import {RouterLink} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {DisplayDatabaseValuePipe} from "../../../pipes/display-database-value.pipe";
 import {TranslocoPipe} from "@jsverse/transloco";
 
@@ -25,6 +25,8 @@ export type DeleteCallback<T extends AbstractEntity> = (item: T) => Promise<bool
   styleUrl: './data-list-table.component.scss'
 })
 export class DataListTableComponent implements OnInit {
+  private readonly perPage = 30;
+
   private defaultColumnNames = signal<Record<string, string>>({});
   protected allColumnNames: Signal<Record<string, string | undefined>> = computed(() => ({...this.defaultColumnNames(), ...this.columnNames()}));
 
@@ -40,6 +42,11 @@ export class DataListTableComponent implements OnInit {
 
   protected loading = signal(true);
   protected items = signal<AbstractEntity[]>([]);
+  protected totalCount = signal(0);
+  protected maxPage = computed(() => Math.ceil(this.totalCount() / this.perPage))
+  protected currentPage = signal(1);
+  protected prevPageAvailable = computed(() => this.currentPage() > 1);
+  protected nextPageAvailable = computed(() => this.currentPage() < this.maxPage());
 
   protected headers = computed(() => {
     const result: string[] = [];
@@ -56,9 +63,13 @@ export class DataListTableComponent implements OnInit {
 
   constructor(
     private readonly translator: TranslatorService,
+    private readonly activatedRoute: ActivatedRoute,
   ) {
     effect(() => {
       this.loadingChanged.emit(this.loading());
+    });
+    effect(() => {
+      this.totalCountResolved.emit(this.totalCount());
     });
   }
 
@@ -76,13 +87,23 @@ export class DataListTableComponent implements OnInit {
     }
     this.defaultColumnNames.set(defaultColumnNames);
 
-    this.items.set(await toPromise(
-      this.repository().collection().pipe(
-        tap(collection => this.totalCountResolved.emit(collection.totalItems)),
-        map(collection => collection.toArray()),
-      )
-    ));
-    this.loading.set(false);
+    this.activatedRoute.queryParams.subscribe(async query => {
+      this.loading.set(true);
+
+      this.currentPage.set(Number(query['page'] ?? 1));
+
+      this.items.set(await toPromise(
+        this.repository().collection({
+          page: this.currentPage(),
+          maxResults: this.perPage,
+        }).pipe(
+          tap(collection => this.totalCount.set(collection.totalItems)),
+          map(collection => collection.toArray()),
+        )
+      ));
+
+      this.loading.set(false);
+    });
   }
 
   public async deleteItem(itemToDelete: AbstractEntity): Promise<void> {
