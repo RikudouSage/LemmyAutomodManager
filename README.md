@@ -1,27 +1,31 @@
-# LemmyAutomodManager
+# Lemmy Automod Manager
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.5.
+This is a web GUI for [Lemmy Automod](https://github.com/RikudouSage/LemmyAutomod).
 
-## Development server
+You need to enable the management api for this UI to work. **The management api should not be accessible over public networks.**
+Additionally, if you use a custom build of this app (meaning you don't use the official docker image) and you enable server side rendering,
+**you should make this UI inaccessible over a public network as well**.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+> Don't forget to enable CORS for the management api.
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Simply use the `ghcr.io/rikudousage/lemmy-automod-manager` docker image and configure the api URL using the environment variable `API_URL`.
 
-## Build
+For example, using docker compose:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+> replace `http://127.0.0.1:4005` with any URL the management api is accessible on from your computer.
 
-## Running unit tests
+```yaml
+  automod_manager:
+    image: ghcr.io/rikudousage/lemmy-automod-manager:dev
+    environment:
+      - API_URL=http://127.0.0.1:4005
+    ports:
+      - 4006:80
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The UI runs on port 80 in the container, in the example above it's bound to local port 4006.
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+> Because all api requests are done client-side, you can install the UI anywhere (even locally) and simply expose the api
+> to your computer - it doesn't have to run on the server at all.
