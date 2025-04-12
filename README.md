@@ -37,3 +37,7 @@ The UI runs on port 80 in the container, in the example above it's bound to loca
 
 > Because all api requests are done client-side, you can install the UI anywhere (even locally) and simply expose the api
 > to your computer - it doesn't have to run on the server at all.
+
+## Securing the API
+
+The Automod README contains tips on securing the api: [Securely accessing the api](https://github.com/RikudouSage/LemmyAutomod#securely-accessing-the-api).
