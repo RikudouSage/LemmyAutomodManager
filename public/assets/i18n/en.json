@@ -37,5 +37,10 @@
   "app.banned_emails.name": "Banned emails",
   "app.banned_emails.description": "The regexes in this section are evaluated when a new user registers and their email address is checked against them.",
   "app.banned_emails.edit.title": "Edit email ban with id '{{id}}'",
-  "app.banned_emails.add.title": "Add a new email ban"
+  "app.banned_emails.add.title": "Add a new email ban",
+
+  "app.private_message_bans.name": "Private message bans",
+  "app.private_message_bans.description": "The regexes here are checked against the content of each private message that's being sent from or to your instance's users.",
+  "app.private_message_bans.edit.title": "Edit private message ban regex with id '{{id}}'",
+  "app.private_message_bans.add.title": "Add private message ban regex"
 }

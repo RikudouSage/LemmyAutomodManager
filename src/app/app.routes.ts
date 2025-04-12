@@ -29,4 +29,16 @@ export const routes: Routes = [
     path: 'banned-emails/detail/:id',
     loadComponent: () => import('./banned-emails/pages/banned-emails-detail/banned-emails-detail.component').then(m => m.BannedEmailsDetailComponent),
   },
+  {
+    path: 'private-message-bans',
+    loadComponent: () => import('./private-message-bans/pages/private-message-bans-list/private-message-bans-list.component').then(m => m.PrivateMessageBansListComponent),
+  },
+  {
+    path: 'private-message-bans/add',
+    loadComponent: () => import('./private-message-bans/pages/private-message-bans-detail/private-message-bans-detail.component').then(m => m.PrivateMessageBansDetailComponent),
+  },
+  {
+    path: 'private-message-bans/detail/:id',
+    loadComponent: () => import('./private-message-bans/pages/private-message-bans-detail/private-message-bans-detail.component').then(m => m.PrivateMessageBansDetailComponent),
+  },
 ];

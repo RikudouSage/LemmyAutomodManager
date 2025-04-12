@@ -5,15 +5,18 @@ import {TitleService} from "../../../services/title.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {toPromise} from "../../../helper/resolvable";
-import {BannedEmail, BannedEmailRepository} from "../../../entity/banned-email.entity";
 import {defaultDetailDeleteCallback, defaultSaveCallback} from "../../../helper/default-implementations";
+import {
+  PrivateMessageBanRegex,
+  PrivateMessageBanRegexRepository
+} from "../../../entity/private-message-ban-regex.entity";
 import {CheckboxComponent} from "../../../root/components/checkbox/checkbox.component";
 import {LoaderComponent} from "../../../root/components/loader/loader.component";
 import {TranslocoMarkupComponent} from "ngx-transloco-markup";
 import {TranslocoPipe} from "@jsverse/transloco";
 
 @Component({
-  selector: 'app-banned-emails-detail',
+  selector: 'app-private-message-bans-detail',
   standalone: true,
   imports: [
     CheckboxComponent,
@@ -23,11 +26,11 @@ import {TranslocoPipe} from "@jsverse/transloco";
     TranslocoMarkupComponent,
     TranslocoPipe
   ],
-  templateUrl: './banned-emails-detail.component.html',
-  styleUrl: './banned-emails-detail.component.scss'
+  templateUrl: './private-message-bans-detail.component.html',
+  styleUrl: './private-message-bans-detail.component.scss'
 })
-export class BannedEmailsDetailComponent implements OnInit {
-  private item = signal<BannedEmail | null>(null);
+export class PrivateMessageBansDetailComponent implements OnInit {
+  private item = signal<PrivateMessageBanRegex | null>(null);
 
   protected itemId = signal(0);
   protected loading = signal(true);
@@ -36,13 +39,14 @@ export class BannedEmailsDetailComponent implements OnInit {
     regex: new FormControl<string>('', [Validators.required]),
     reason: new FormControl<string>(''),
     enabled: new FormControl(true),
+    removeAll: new FormControl(true),
   });
 
   constructor(
     private readonly translator: TranslatorService,
     private readonly titleService: TitleService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly repository: BannedEmailRepository,
+    private readonly repository: PrivateMessageBanRegexRepository,
     private readonly toastr: ToastrService,
     private readonly router: Router,
   ) {
@@ -53,13 +57,13 @@ export class BannedEmailsDetailComponent implements OnInit {
       this.itemId.set(Number(params['id'] as string | undefined ?? null));
 
       if (this.itemId()) {
-        this.titleService.title.set(await toPromise(this.translator.get('app.banned_emails.edit.title', {id: this.itemId()})));
+        this.titleService.title.set(await toPromise(this.translator.get('app.private_message_bans.edit.title', {id: this.itemId()})));
         const item = await toPromise(this.repository.get(this.itemId()));
         this.form.patchValue(item.attributes);
         this.item.set(item);
       } else {
-        this.titleService.title.set(await toPromise(this.translator.get('app.banned_emails.add.title')));
-        this.item.set(new BannedEmail(false));
+        this.titleService.title.set(await toPromise(this.translator.get('app.private_message_bans.add.title')));
+        this.item.set(new PrivateMessageBanRegex(false))
       }
       this.loading.set(false);
     });
@@ -75,6 +79,7 @@ export class BannedEmailsDetailComponent implements OnInit {
         this.item()!.attributes = {
           regex: form.value.regex!,
           reason: form.value.reason ?? null,
+          removeAll: this.form.value.removeAll ?? false,
           enabled: this.form.value.enabled ?? true,
         };
       },
@@ -82,7 +87,7 @@ export class BannedEmailsDetailComponent implements OnInit {
       this.repository,
       this.item,
       this.router,
-      `/banned-emails/detail/%id%`,
+      `/private-message-bans/detail/%id%`,
     )();
   }
 
@@ -92,7 +97,7 @@ export class BannedEmailsDetailComponent implements OnInit {
       this.repository,
       this.item,
       this.router,
-      '/ban-regexes',
+      '/private-message-bans',
       this.toastr,
       this.translator,
     )();
