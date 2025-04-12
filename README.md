@@ -1,5 +1,11 @@
 # Lemmy Automod Manager
 
+<!-- TOC -->
+* [Lemmy Automod Manager](#lemmy-automod-manager)
+  * [Installation](#installation)
+  * [Securing the API](#securing-the-api)
+<!-- TOC -->
+
 This is a web GUI for [Lemmy Automod](https://github.com/RikudouSage/LemmyAutomod).
 
 You need to enable the management api for this UI to work. **The management api should not be accessible over public networks.**
