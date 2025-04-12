@@ -17,6 +17,16 @@ For example, using docker compose:
 > replace `http://127.0.0.1:4005` with any URL the management api is accessible on from your computer.
 
 ```yaml
+  automod:
+    image: ghcr.io/rikudousage/lemmy-automod:dev
+    environment:
+      - MANAGEMENT_API_ENABLED=1
+      - CORS_ALLOW_ORIGIN=^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$
+      # configure the other environment variables according to your needs, see the automod readme for details
+    volumes:
+      - ./volumes/automod:/opt/database
+    ports:
+      - 4005:80
   automod_manager:
     image: ghcr.io/rikudousage/lemmy-automod-manager:dev
     environment:
