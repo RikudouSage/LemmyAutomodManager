@@ -23,8 +23,6 @@ For example, using docker compose:
       - MANAGEMENT_API_ENABLED=1
       - CORS_ALLOW_ORIGIN=^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$
       # configure the other environment variables according to your needs, see the automod readme for details
-    volumes:
-      - ./volumes/automod:/opt/database
     ports:
       - 4005:80
   automod_manager:
