@@ -21,4 +21,12 @@ export const routes: Routes = [
     path: 'banned-emails',
     loadComponent: () => import('./banned-emails/pages/banned-emails-list/banned-emails-list.component').then(m => m.BannedEmailsListComponent),
   },
+  {
+    path: 'banned-emails/add',
+    loadComponent: () => import('./banned-emails/pages/banned-emails-detail/banned-emails-detail.component').then(m => m.BannedEmailsDetailComponent),
+  },
+  {
+    path: 'banned-emails/detail/:id',
+    loadComponent: () => import('./banned-emails/pages/banned-emails-detail/banned-emails-detail.component').then(m => m.BannedEmailsDetailComponent),
+  },
 ];

@@ -35,5 +35,7 @@
   "app.ban_regexes.add.title": "Add a new ban regex",
 
   "app.banned_emails.name": "Banned emails",
-  "app.banned_emails.description": "The regexes in this section are evaluated when a new user registers and their email address is checked against them."
+  "app.banned_emails.description": "The regexes in this section are evaluated when a new user registers and their email address is checked against them.",
+  "app.banned_emails.edit.title": "Edit email ban with id '{{id}}'",
+  "app.banned_emails.add.title": "Add a new email ban"
 }

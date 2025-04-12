@@ -13,7 +13,7 @@ import {FormatNumberPipe} from "../../../pipes/format-number.pipe";
 import {RouterLink} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {AbstractEntity} from "../../../services/json-api/abstract.entity";
-import {getDefaultDeleteCallback} from "../../../helper/default-delete-callback";
+import {defaultDeleteCallback} from "../../../helper/default-implementations";
 
 @Component({
   selector: 'app-ban-regexes-list',
@@ -38,7 +38,7 @@ export class BanRegexesListComponent implements OnInit {
     public readonly repository: InstanceBanRegexRepository,
     toastr: ToastrService,
   ) {
-    this.deleteItemCallback = signal(getDefaultDeleteCallback(this.repository, toastr, this.translator));
+    this.deleteItemCallback = signal(defaultDeleteCallback(this.repository, toastr, this.translator));
   }
 
   public async ngOnInit(): Promise<void> {

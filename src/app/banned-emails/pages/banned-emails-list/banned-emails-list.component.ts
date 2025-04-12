@@ -6,7 +6,7 @@ import {ToastrService} from "ngx-toastr";
 import {toPromise} from "../../../helper/resolvable";
 import {BannedEmail, BannedEmailRepository} from "../../../entity/banned-email.entity";
 import {AbstractEntity} from "../../../services/json-api/abstract.entity";
-import {getDefaultDeleteCallback} from "../../../helper/default-delete-callback";
+import {defaultDeleteCallback} from "../../../helper/default-implementations";
 import {
   DataListTableComponent,
   DeleteCallback
@@ -39,7 +39,7 @@ export class BannedEmailsListComponent implements OnInit {
     public readonly repository: BannedEmailRepository,
     toastr: ToastrService,
   ) {
-    this.deleteItemCallback = signal(getDefaultDeleteCallback(this.repository, toastr, this.translator));
+    this.deleteItemCallback = signal(defaultDeleteCallback(this.repository, toastr, this.translator));
   }
 
   public async ngOnInit(): Promise<void> {
