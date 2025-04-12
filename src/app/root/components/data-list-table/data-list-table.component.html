@@ -44,4 +44,34 @@
       }
     </tbody>
   </table>
+
+  <ul class="pagination justify-content-end">
+    <li class="page-item" [class.disabled]="currentPage() - 1 < 1">
+      <a
+        class="page-link"
+        [href]="previousPageHref()"
+        (click)="navigateToPage(currentPage() - 1, $event)"
+      >«</a>
+    </li>
+    @for (page of pages(); track page; let i = $index) {
+      <li class="page-item" [class.active]="page === currentPage()" [class.disabled]="page === '...'">
+        @if ((page | getTypeof) === 'number') {
+          <a
+            class="page-link"
+            [href]="renderPageHrefs()[i]"
+            (click)="navigateToPage($any(page), $event)"
+          >{{ page }}</a>
+        } @else {
+          <span class="page-link">{{ page }}</span>
+        }
+      </li>
+    }
+    <li class="page-item" [class.disabled]="currentPage() + 1 > lastPage()">
+      <a
+        class="page-link"
+        [href]="nextPageHref()"
+        (click)="navigateToPage(currentPage() + 1, $event)"
+      >»</a>
+    </li>
+  </ul>
 }
