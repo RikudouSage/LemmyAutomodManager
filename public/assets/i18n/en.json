@@ -32,5 +32,8 @@
   "app.ban_regexes.name": "Ban regexes",
   "app.ban_regexes.description": "The regexes specified here are checked when a post or comment gets created or updated, the fields checked are: post title, post body, post url, author name and author display name for posts, comment content and author name and display name for comments.",
   "app.ban_regexes.edit.title": "Edit ban regex with id '{{id}}'",
-  "app.ban_regexes.add.title": "Add a new ban regex"
+  "app.ban_regexes.add.title": "Add a new ban regex",
+
+  "app.banned_emails.name": "Banned emails",
+  "app.banned_emails.description": "The regexes in this section are evaluated when a new user registers and their email address is checked against them."
 }

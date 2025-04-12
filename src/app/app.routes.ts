@@ -17,4 +17,8 @@ export const routes: Routes = [
     path: 'ban-regexes/add',
     loadComponent: () => import('./ban-regexes/pages/ban-regexes-detail/ban-regexes-detail.component').then(m => m.BanRegexesDetailComponent),
   },
+  {
+    path: 'banned-emails',
+    loadComponent: () => import('./banned-emails/pages/banned-emails-list/banned-emails-list.component').then(m => m.BannedEmailsListComponent),
+  },
 ];
