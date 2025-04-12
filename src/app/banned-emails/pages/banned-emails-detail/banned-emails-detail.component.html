@@ -27,7 +27,7 @@
               </small>
             </div>
 
-            <button class="btn btn-primary" type="submit">{{'app.save' | transloco}}</button>
+            <button class="btn btn-primary" type="submit" [disabled]="!form.valid">{{'app.save' | transloco}}</button>
             @if (itemId()) {
               &nbsp;
               <button class="btn btn-danger" type="button" (click)="removeItem()">{{'app.remove' | transloco}}</button>

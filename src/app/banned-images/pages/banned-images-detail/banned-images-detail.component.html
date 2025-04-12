@@ -1,0 +1,86 @@
+@if (loading()) {
+  <app-loader />
+} @else {
+  <ng-template #calculateHashModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{'app.banned_images.calculate_button' | transloco}}</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body">
+      <div class="mb-3 form-group">
+        <label for="calculateHashInput">{{'app.banned_images.calculate.image_url' | transloco}}</label>
+        <div class="input-group">
+          <input id="calculateHashInput" class="form-control" #imageUrlInput />
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">
+        {{'app.cancel' | transloco}}
+      </button>
+      <button type="button" class="btn btn-primary" (click)="modal.close(imageUrlInput.value)">
+        {{'app.banned_images.calculate_button' | transloco}}
+      </button>
+    </div>
+  </ng-template>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="form-group">
+              <label for="inputImageHash">{{'app.column.image_hash' | transloco}}</label>
+              <input class="form-control" id="inputImageHash" formControlName="imageHash" aria-describedby="inputImageHashDescription" />
+              <small id="inputImageHashDescription">
+                <transloco key="app.column.image_hash.description" />
+              </small>
+              <br>
+              <button class="btn btn-secondary" type="button" (click)="openModal(calculateHashModal)">{{'app.banned_images.calculate_button' | transloco}}</button>
+            </div>
+            <div class="form-group">
+              <label for="inputSimilarityPercent">{{'app.column.similarity_percent' | transloco}}</label>
+              <input min="0" max="100" step="0.1" class="custom-range" id="inputSimilarityPercent" type="range" formControlName="similarityPercent" aria-describedby="inputSimilarityPercentDescription" />
+              <small>{{form.controls.similarityPercent.value }}%</small><br>
+              <small id="inputSimilarityPercentDescription">
+                <transloco key="app.column.similarity_percent.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputReason">{{'app.column.reason' | transloco}}</label>
+              <textarea class="form-control" id="inputReason" formControlName="reason" aria-describedby="inputReasonDescription"></textarea>
+              <small id="inputReasonDescription">
+                <transloco key="app.column.reason.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputDescription">{{'app.column.description' | transloco}}</label>
+              <textarea class="form-control" id="inputDescription" formControlName="reason" aria-describedby="inputDescriptionDescription"></textarea>
+              <small id="inputDescriptionDescription">
+                <transloco key="app.column.description.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <app-checkbox formControlName="enabled" [label]="'app.column.enabled' | transloco" />
+              <small>
+                <transloco key="app.column.enabled.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <app-checkbox formControlName="removeAll" [label]="'app.column.remove_all' | transloco" />
+              <small>
+                <transloco key="app.column.remove_all.description" />
+              </small>
+            </div>
+
+            <button class="btn btn-primary" type="submit" [disabled]="!form.valid">{{'app.save' | transloco}}</button>
+            @if (itemId()) {
+              &nbsp;
+              <button class="btn btn-danger" type="button" (click)="removeItem()">{{'app.remove' | transloco}}</button>
+            }
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+}

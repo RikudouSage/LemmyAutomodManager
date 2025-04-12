@@ -41,4 +41,16 @@ export const routes: Routes = [
     path: 'private-message-bans/detail/:id',
     loadComponent: () => import('./private-message-bans/pages/private-message-bans-detail/private-message-bans-detail.component').then(m => m.PrivateMessageBansDetailComponent),
   },
+  {
+    path: 'banned-images',
+    loadComponent: () => import('./banned-images/pages/banned-images-list/banned-images-list.component').then(m => m.BannedImagesListComponent),
+  },
+  {
+    path: 'banned-images/add',
+    loadComponent: () => import('./banned-images/pages/banned-images-detail/banned-images-detail.component').then(m => m.BannedImagesDetailComponent),
+  },
+  {
+    path: 'banned-images/detail/:id',
+    loadComponent: () => import('./banned-images/pages/banned-images-detail/banned-images-detail.component').then(m => m.BannedImagesDetailComponent),
+  },
 ];

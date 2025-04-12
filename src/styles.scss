@@ -1,8 +1,9 @@
+@import "ngx-toastr/toastr";
+@import "styles/bootstrap";
+
 @import "styles/adminlte.css";
 @import "styles/dark.css";
 @import "styles/font-awesome.css";
-
-@import "ngx-toastr/toastr";
 
 input, textarea {
   &.ng-invalid.ng-dirty {
@@ -11,5 +12,11 @@ input, textarea {
     &:focus {
       border-color: darken(red, 20%) !important;
     }
+  }
+}
+
+.dark-mode ngb-modal-window {
+  .modal-content {
+    color: white;
   }
 }

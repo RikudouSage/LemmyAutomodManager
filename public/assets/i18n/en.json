@@ -8,11 +8,14 @@
   "app.save": "Save",
   "app.remove": "Remove",
   "app.actions": "Actions",
+  "app.cancel": "Cancel",
 
   "app.error": "Error",
   "app.error.invalid_form": "The form is not valid.",
   "app.error.failed_saving": "There was an error while saving the item, please try again later.",
   "app.error.failed_removing": "There was an error while removing the item, please try again later.",
+  "app.error.invalid_url": "The provided URL is not valid.",
+  "app.error.failed_calculating_hash": "Calculating the hash failed.",
 
   "app.success": "Success",
   "app.success.item_created": "The item was successfully created.",
@@ -28,6 +31,12 @@
   "app.column.enabled.description": "Whether this rule is enabled or not, disabled rules are skipped entirely.",
   "app.column.remove_all": "Remove all",
   "app.column.remove_all.description": "When enabled, all posts and comments by the user will be removed as well. If unchecked, only the offending post/comment will be removed in addition to the user being banned.",
+  "app.column.similarity_percent": "Similarity (%)",
+  "app.column.similarity_percent.description": "How similar do the images need to be to trigger this rule.",
+  "app.column.description": "Description",
+  "app.column.description.description": "An internal description for this image, this will only be visible in notifications if you have any enabled.",
+  "app.column.image_hash": "Image hash",
+  "app.column.image_hash.description": "The calculated image hash, you can use the button below to calculate the hash for an image.",
 
   "app.ban_regexes.name": "Ban regexes",
   "app.ban_regexes.description": "The regexes specified here are checked when a post or comment gets created or updated, the fields checked are: post title, post body, post url, author name and author display name for posts, comment content and author name and display name for comments.",
@@ -42,5 +51,12 @@
   "app.private_message_bans.name": "Private message bans",
   "app.private_message_bans.description": "The regexes here are checked against the content of each private message that's being sent from or to your instance's users.",
   "app.private_message_bans.edit.title": "Edit private message ban regex with id '{{id}}'",
-  "app.private_message_bans.add.title": "Add private message ban regex"
+  "app.private_message_bans.add.title": "Add private message ban regex",
+
+  "app.banned_images.name": "Banned images",
+  "app.banned_images.description": "Uses hashing for images based on their content and then compares them to each posts URL, if it looks like it contains an image. Might slow down operations because it has to download each and every image and then hash it.",
+  "app.banned_images.edit.title": "Edit image ban with id '{{id}}'",
+  "app.banned_images.add.title": "Add a new image ban",
+  "app.banned_images.calculate_button": "Calculate from URL",
+  "app.banned_images.calculate.image_url": "Image URL"
 }

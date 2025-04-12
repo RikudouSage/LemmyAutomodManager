@@ -1,3 +1,24 @@
 :host {
   min-width: 100%;
 }
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  td:first-of-type {
+    position: sticky;
+    left: 0;
+    background: white;
+    z-index: 1;
+  }
+}
+
+:host-context(.dark-mode) .table td:first-of-type {
+  background: #343a40;
+}
