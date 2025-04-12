@@ -2,35 +2,46 @@
   <app-loader/>
 } @else {
   <table class="table table-striped">
+    <thead>
     <tr>
       @for (header of headers(); track header) {
         <th>
           {{ allColumnNames()[header] ?? header }}
         </th>
       }
+      @if (deleteCallback()) {
+        <th>{{ 'app.actions' | transloco }}</th>
+      }
     </tr>
-
-    @for (item of items(); track item.id) {
-      <tr>
-        @for (header of headers(); track header) {
-          @let link = header === identifierField() ? detailUrl().replace('%value%', header === 'id' ? item.id : $any(item.attributes)[header]) : null;
-          <td>
-            @if (header === "id") {
-              @if (link) {
-                <a [routerLink]="link">{{item.id}}</a>
+    </thead>
+    <tbody>
+      @for (item of items(); track item.id) {
+        <tr>
+          @for (header of headers(); track header) {
+            @let link = header === identifierField() ? detailUrl().replace('%value%', header === 'id' ? item.id : $any(item.attributes)[header]) : null;
+            <td>
+              @if (header === "id") {
+                @if (link) {
+                  <a [routerLink]="link">{{ item.id }}</a>
+                } @else {
+                  {{ item.id | displayDatabaseValue }}
+                }
               } @else {
-                {{item.id | displayDatabaseValue}}
+                @if (link) {
+                  <a [routerLink]="link">{{ $any(item.attributes)[header] }}</a>
+                } @else {
+                  {{ $any(item.attributes)[header] | displayDatabaseValue }}
+                }
               }
-            } @else {
-              @if (link) {
-                <a [routerLink]="link">{{$any(item.attributes)[header]}}</a>
-              } @else {
-                {{$any(item.attributes)[header] | displayDatabaseValue}}
-              }
-            }
-          </td>
-        }
-      </tr>
-    }
+            </td>
+          }
+          @if (deleteCallback()) {
+            <td>
+              <a href="javascript:void(0)" class="text-danger" (click)="deleteItem(item)">{{'app.remove' | transloco}}</a>
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
   </table>
 }

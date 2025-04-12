@@ -8,6 +8,9 @@ import {LoaderComponent} from "../loader/loader.component";
 import {TranslatorService} from "../../../services/translator.service";
 import {RouterLink} from "@angular/router";
 import {DisplayDatabaseValuePipe} from "../../../pipes/display-database-value.pipe";
+import {TranslocoPipe} from "@jsverse/transloco";
+
+export type DeleteCallback<T extends AbstractEntity> = (item: T) => Promise<boolean>;
 
 @Component({
   selector: 'app-data-list-table',
@@ -15,7 +18,8 @@ import {DisplayDatabaseValuePipe} from "../../../pipes/display-database-value.pi
   imports: [
     LoaderComponent,
     RouterLink,
-    DisplayDatabaseValuePipe
+    DisplayDatabaseValuePipe,
+    TranslocoPipe
   ],
   templateUrl: './data-list-table.component.html',
   styleUrl: './data-list-table.component.scss'
@@ -26,9 +30,10 @@ export class DataListTableComponent implements OnInit {
 
   public repository = input.required<AbstractRepository<AbstractEntity>>();
   public identifierField = input.required<string>();
+  public detailUrl = input.required<string>();
   public hiddenColumns = input<string[]>([]);
   public columnNames = input<Record<string, string>>({});
-  public detailUrl = input.required<string>();
+  public deleteCallback = input<DeleteCallback<AbstractEntity> | null>(null);
 
   public loadingChanged = output<boolean>();
   public totalCountResolved = output<number>();
@@ -78,5 +83,12 @@ export class DataListTableComponent implements OnInit {
       )
     ));
     this.loading.set(false);
+  }
+
+  public async deleteItem(itemToDelete: AbstractEntity): Promise<void> {
+    const callback = this.deleteCallback()!;
+    if (await callback(itemToDelete)) {
+      this.items.update(items => items.filter(item => item.id !== itemToDelete.id));
+    }
   }
 }

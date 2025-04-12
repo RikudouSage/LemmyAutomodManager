@@ -20,6 +20,7 @@
           [repository]="repository"
           identifierField="id"
           detailUrl="/ban-regexes/detail/%value%"
+          [deleteCallback]="deleteItemCallback()"
 
           (totalCountResolved)="totalCount.set($event)"
         />
