@@ -3,4 +3,4 @@ if [ -z ${API_URL+x} ]; then
   exit 1
 fi
 
-echo "window['API_URL'] = '$API_URL';" > /usr/share/nginx/html/assets/runtime-environment.js
+echo "window['API_URL'] = '$API_URL';" > /usr/share/nginx/html/runtime-environment.js
