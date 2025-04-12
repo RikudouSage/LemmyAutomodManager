@@ -11,8 +11,8 @@ COPY . .
 RUN yarn install
 RUN yarn build
 
-FROM node:22-slim
+FROM nginx
 
-COPY docker/entrypoint.sh /entrypoint.sh
-COPY --from=build /app/dist/lemmy-automod-manager /app
-ENTRYPOINT ["/entrypoint.sh"]
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
+COPY docker/docker-build.sh /docker-entrypoint.d/99-docker-build.sh
+COPY --from=build /app/dist/lemmy-automod-manager/browser /usr/share/nginx/html
