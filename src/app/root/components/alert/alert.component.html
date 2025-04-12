@@ -1,0 +1,12 @@
+@if (!deleted()) {
+  <div class="alert alert-dismissible"
+       [class.alert-info]="type() === AlertType.Info"
+       [class.alert-danger]="type() === AlertType.Error"
+       [class.alert-success]="type() === AlertType.Success"
+       [class.alert-warning]="type() === AlertType.Warning"
+  >
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" (click)="deleted.set(true)">×</button>
+    <h5><i class="icon fas fa-info"></i> {{title()}}</h5>
+    <ng-content />
+  </div>
+}

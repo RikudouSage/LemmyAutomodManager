@@ -1,15 +1,11 @@
 import {AbstractEntity} from "../services/json-api/abstract.entity";
 import {AbstractRepository} from "../services/json-api/abstract.repository";
 import {Injectable} from "@angular/core";
+import {DisableableEntity, RegexReasonEntity, RemoveAllEntity} from "../helper/common-entity-types";
 
 export class PrivateMessageBanRegex extends AbstractEntity {
     public override type: string = 'private-message-ban-regex';
-    public override attributes: {
-      regex: string;
-      reason: string | null;
-      removeAll: boolean;
-      enabled: boolean;
-    } = {
+    public override attributes: RegexReasonEntity&DisableableEntity&RemoveAllEntity = {
       regex: '',
       reason: null,
       enabled: false,

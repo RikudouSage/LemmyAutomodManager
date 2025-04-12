@@ -53,4 +53,16 @@ export const routes: Routes = [
     path: 'banned-images/detail/:id',
     loadComponent: () => import('./banned-images/pages/banned-images-detail/banned-images-detail.component').then(m => m.BannedImagesDetailComponent),
   },
+  {
+    path: 'watched-users',
+    loadComponent: () => import('./watched-users/pages/watched-users-list/watched-users-list.component').then(m => m.WatchedUsersListComponent),
+  },
+  {
+    path: 'watched-users/add',
+    loadComponent: () => import('./watched-users/pages/watched-users-detail/watched-users-detail.component').then(m => m.WatchedUsersDetailComponent),
+  },
+  {
+    path: 'watched-users/detail/:id',
+    loadComponent: () => import('./watched-users/pages/watched-users-detail/watched-users-detail.component').then(m => m.WatchedUsersDetailComponent),
+  },
 ];
