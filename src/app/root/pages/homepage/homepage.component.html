@@ -5,5 +5,90 @@
         <transloco key="app.welcome_text" [params]="{sourceLink: 'https://github.com/RikudouSage/LemmyAutomod'}" />
       </div>
     </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">{{'app.stats.name' | transloco}}</h4>
+      </div>
+      <div class="card-body">
+        @if (stats()) {
+          <table class="table table-striped">
+            <tr>
+              <th>{{'app.stats.stat_name' | transloco}}</th>
+              <th>{{'app.value' | transloco}}</th>
+<!--              <th>{{'app.description' | transloco}}</th>-->
+            </tr>
+            <tr>
+              <td>{{'app.stats.in_queue' | transloco}}</td>
+              <td>
+                @if (stats()!.messageCount !== null) {
+                  {{stats()!.messageCount! | formatNumber}}
+                } @else {
+                  <code>{{'app.na' | transloco}}</code>
+                }
+              </td>
+            </tr>
+            <tr>
+              <td>{{'app.stats.notification_channels' | transloco}}</td>
+              <td>
+                @if (stats()!.notificationChannels.length) {
+                  <ul>
+                    @for (channel of stats()!.notificationChannels; track channel) {
+                      <li>{{channel}}</li>
+                    }
+                  </ul>
+                } @else {
+                  {{'app.stats.no_notification_channels' | transloco}}
+                }
+              </td>
+            </tr>
+            <tr>
+              <td>{{'app.stats.notification_users' | transloco}}</td>
+              <td>
+                @if (stats()!.lemmyNotificationUsers === null) {
+                  <code>{{'app.na' | transloco}}</code>
+                } @else {
+                  <ul>
+                    @for (user of stats()!.lemmyNotificationUsers!; track user) {
+                      <li>{{user}}</li>
+                    }
+                  </ul>
+                }
+              </td>
+            </tr>
+            <tr>
+              <td>{{'app.stats.notify_new_users' | transloco}}</td>
+              <td><app-yes-no [value]="stats()!.notifyNewUsers" /></td>
+            </tr>
+            <tr>
+              <td>{{'app.stats.notify_first_post_comment' | transloco}}</td>
+              <td><app-yes-no [value]="stats()!.notifyFirstPostComment" /></td>
+            </tr>
+            <tr>
+              <td>{{'app.stats.notify_reports' | transloco}}</td>
+              <td><app-yes-no [value]="stats()!.notifyReports" /></td>
+            </tr>
+            <tr>
+              <td>{{'app.stats.fediseer_enabled' | transloco}}</td>
+              <td><app-yes-no [value]="stats()!.usesFediseer" /></td>
+            </tr>
+            <tr>
+              <td>{{'app.stats.ai_horde_enabled' | transloco}}</td>
+              <td><app-yes-no [value]="stats()!.aiHordeConfigured" /></td>
+            </tr>
+            <tr>
+              <td>{{'app.stats.signed_webhooks_enabled' | transloco}}</td>
+              <td><app-yes-no [value]="stats()!.signedWebhooks" /></td>
+            </tr>
+            <tr>
+              <td>{{'app.stats.log_level' | transloco}}</td>
+              <td>{{stats()!.logLevel}}</td>
+            </tr>
+          </table>
+        } @else {
+          <app-loader />
+        }
+      </div>
+    </div>
   </div>
 </div>

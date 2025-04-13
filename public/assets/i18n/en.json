@@ -10,6 +10,10 @@
   "app.actions": "Actions",
   "app.cancel": "Cancel",
   "app.info": "Info",
+  "app.value": "Value",
+  "app.na": "N/A",
+  "app.yes": "Yes",
+  "app.no": "No",
 
   "app.info.user_id_username_instance_mix_info": "In the form below you can fill out the [b]username[/b], [b]instance[/b] and [b]user id[/b], but you don't have to fill out all of them. The only field needed is the [b]user id[/b], but if you don't want to look it up, you can fill out [b]both username and instance[/b] and the user id will be fetched automatically when the rule is evaluated.",
 
@@ -46,6 +50,20 @@
   "app.column.instance.description": "The instance domain of the target user.",
   "app.column.user_id": "User ID",
   "app.column.user_id.description": "The user id of the target user, this is an internal id that's not very visible on the UI, but it can be fetched using api or from the database.",
+
+  "app.stats.name": "Stats & config",
+  "app.stats.stat_name": "Name",
+  "app.stats.in_queue": "Jobs to process",
+  "app.stats.notification_channels": "Notification channels",
+  "app.stats.no_notification_channels": "No notification channels enabled.",
+  "app.stats.notification_users": "Lemmy notification users",
+  "app.stats.notify_new_users": "Notify about new users",
+  "app.stats.notify_first_post_comment": "Notify about user's first post/comment",
+  "app.stats.notify_reports": "Notify about reports",
+  "app.stats.fediseer_enabled": "Fediseer integration",
+  "app.stats.ai_horde_enabled": "AI Horde integration",
+  "app.stats.signed_webhooks_enabled": "Requires signed webhook calls",
+  "app.stats.log_level": "Logging level",
 
   "app.ban_regexes.name": "Ban regexes",
   "app.ban_regexes.description": "The regexes specified here are checked when a post or comment gets created or updated, the fields checked are: post title, post body, post url, author name and author display name for posts, comment content and author name and display name for comments. The fields are also transliterated to latin characters, so the rules run on both the original form and transliterated latin form which helps with common tactic of using UTF-8 characters instead of regular letters.",
