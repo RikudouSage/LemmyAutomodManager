@@ -1,5 +1,7 @@
 @if (loading()) {
   <app-loader/>
+} @else if (!items().length) {
+  <p>{{'app.no_items' | transloco}}</p>
 } @else {
   <div class="table-container">
     <table class="table">

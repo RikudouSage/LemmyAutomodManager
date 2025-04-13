@@ -14,6 +14,7 @@
   "app.na": "N/A",
   "app.yes": "Yes",
   "app.no": "No",
+  "app.no_items": "There's nothing available. Why don't you add a new rule?",
 
   "app.info.user_id_username_instance_mix_info": "In the form below you can fill out the [b]username[/b], [b]instance[/b] and [b]user id[/b], but you don't have to fill out all of them. The only field needed is the [b]user id[/b], but if you don't want to look it up, you can fill out [b]both username and instance[/b] and the user id will be fetched automatically when the rule is evaluated.",
 
