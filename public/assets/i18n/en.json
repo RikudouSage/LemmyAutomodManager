@@ -52,7 +52,6 @@
   "app.column.user_id.description": "The user id of the target user, this is an internal id that's not very visible on the UI, but it can be fetched using api or from the database.",
 
   "app.stats.name": "Stats & config",
-  "app.stats.stat_name": "Name",
   "app.stats.in_queue": "Jobs to process",
   "app.stats.notification_channels": "Notification channels",
   "app.stats.no_notification_channels": "No notification channels enabled.",

@@ -14,11 +14,6 @@
         @if (stats()) {
           <table class="table table-striped">
             <tr>
-              <th>{{'app.stats.stat_name' | transloco}}</th>
-              <th>{{'app.value' | transloco}}</th>
-<!--              <th>{{'app.description' | transloco}}</th>-->
-            </tr>
-            <tr>
               <td>{{'app.stats.in_queue' | transloco}}</td>
               <td>
                 @if (stats()!.messageCount !== null) {
