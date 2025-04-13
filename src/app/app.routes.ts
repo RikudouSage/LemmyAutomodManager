@@ -89,4 +89,16 @@ export const routes: Routes = [
     path: 'ignored-users/detail/:id',
     loadComponent: () => import('./ignored-users/pages/ignored-users-detail/ignored-users-detail.component').then(m => m.IgnoredUsersDetailComponent),
   },
+  {
+    path: 'qr-code-bans',
+    loadComponent: () => import('./qr-code-bans/pages/qr-code-bans-list/qr-code-bans-list.component').then(m => m.QrCodeBansListComponent),
+  },
+  {
+    path: 'qr-code-bans/add',
+    loadComponent: () => import('./qr-code-bans/pages/qr-code-bans-detail/qr-code-bans-detail.component').then(m => m.QrCodeBansDetailComponent),
+  },
+  {
+    path: 'qr-code-bans/detail/:id',
+    loadComponent: () => import('./qr-code-bans/pages/qr-code-bans-detail/qr-code-bans-detail.component').then(m => m.QrCodeBansDetailComponent),
+  },
 ];

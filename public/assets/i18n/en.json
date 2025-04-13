@@ -99,5 +99,10 @@
   "app.ignored_users.name": "Ignored users",
   "app.ignored_users.description": "Posts and comments made by users in this table are skipped when analyzing. Useful for various bots you control.",
   "app.ignored_users.edit.title": "Edit ignored user with id '{{id}}'",
-  "app.ignored_users.add.title": "Add ignored user"
+  "app.ignored_users.add.title": "Add ignored user",
+
+  "app.qr_code_bans.name": "Banned QR codes",
+  "app.qr_code_bans.description": "Every post url that contains an image is scanned for QR codes and if a QR code matches any of the regexes below, the user is banned.",
+  "app.qr_code_bans.edit.title": "Edit banned qr code with id '{{id}}'",
+  "app.qr_code_bans.add.title": "Add banned qr code"
 }
