@@ -17,6 +17,6 @@ export class PrivateMessageBanRegex extends AbstractEntity {
   providedIn: 'root',
 })
 export class PrivateMessageBanRegexRepository extends AbstractRepository<PrivateMessageBanRegex> {
-    public override resource: typeof AbstractEntity = PrivateMessageBanRegex;
+    public override resource: typeof PrivateMessageBanRegex = PrivateMessageBanRegex;
     public override type: string = 'private-message-ban-regex';
 }

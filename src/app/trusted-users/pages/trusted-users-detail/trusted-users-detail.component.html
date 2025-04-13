@@ -1,0 +1,45 @@
+@if (loading()) {
+  <app-loader />
+} @else {
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="save()">
+            <app-alert [type]="AlertType.Info" [title]="'app.info' | transloco">
+              <transloco key="app.info.user_id_username_instance_mix_info" />
+            </app-alert>
+
+            <div class="form-group">
+              <label for="inputUsername">{{'app.column.username' | transloco}}</label>
+              <input class="form-control" id="inputUsername" formControlName="username" aria-describedby="inputUsernameDescription" />
+              <small id="inputUsernameDescription">
+                <transloco key="app.column.username.description" [params]="{regex101: 'https://regex101.com'}" />
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputInstance">{{'app.column.instance' | transloco}}</label>
+              <input class="form-control" id="inputInstance" formControlName="instance" aria-describedby="inputInstanceDescription" />
+              <small id="inputInstanceDescription">
+                <transloco key="app.column.instance.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputUserId">{{'app.column.user_id' | transloco}}</label>
+              <input class="form-control" id="inputUserId" formControlName="userId" aria-describedby="inputUserIdDescription" type="number" />
+              <small id="inputUserIdDescription">
+                <transloco key="app.column.user_id.description" />
+              </small>
+            </div>
+
+            <button class="btn btn-primary" type="submit" [disabled]="!form.valid">{{'app.save' | transloco}}</button>
+            @if (itemId()) {
+              &nbsp;
+              <button class="btn btn-danger" type="button" (click)="removeItem()">{{'app.remove' | transloco}}</button>
+            }
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+}

@@ -29,7 +29,7 @@ interface CollectionApiResponse<T> extends ApiResponse<T> {
 }
 
 interface UnknownRecord {
-  [key: string]: unknown;
+  [key: string]: any;
 }
 
 interface StringRecord {
@@ -65,11 +65,13 @@ interface FetchConfig {
   useHttpQuery?: boolean;
 }
 
+export type EntityConstructor<T extends AbstractEntity> = new (initialized?: boolean) => T;
+
 @Injectable({
   providedIn: 'root',
 })
 export abstract class AbstractRepository<T extends AbstractEntity> {
-  public abstract resource: typeof AbstractEntity;
+  public abstract resource: EntityConstructor<T>;
   public abstract type: string;
 
   protected useCache = false;
@@ -263,7 +265,6 @@ export abstract class AbstractRepository<T extends AbstractEntity> {
   }
 
   private parse(object: UnknownRecord, included: StringRecord[] = []): T {
-    // @ts-ignore
     const resource = new this.resource();
     resource.id = object['id'];
     resource.type = object['type'];
@@ -273,8 +274,8 @@ export abstract class AbstractRepository<T extends AbstractEntity> {
       for (const attributeName in attributes) {
         if (Object.prototype.hasOwnProperty.call(attributes, attributeName)) {
           const attributeValue = attributes[attributeName];
-          if (typeof resource.attributes[attributeName] !== 'undefined') {
-            resource.attributes[attributeName] = attributeValue;
+          if (typeof (<Record<string, string>>resource.attributes)[attributeName] !== 'undefined') {
+            (<Record<string, string>>resource.attributes)[attributeName] = attributeValue;
           }
         }
       }

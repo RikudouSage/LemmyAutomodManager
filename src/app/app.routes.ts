@@ -65,4 +65,16 @@ export const routes: Routes = [
     path: 'watched-users/detail/:id',
     loadComponent: () => import('./watched-users/pages/watched-users-detail/watched-users-detail.component').then(m => m.WatchedUsersDetailComponent),
   },
+  {
+    path: 'trusted-users',
+    loadComponent: () => import('./trusted-users/pages/trusted-users-list/trusted-users-list.component').then(m => m.TrustedUsersListComponent),
+  },
+  {
+    path: 'trusted-users/add',
+    loadComponent: () => import('./trusted-users/pages/trusted-users-detail/trusted-users-detail.component').then(m => m.TrustedUsersDetailComponent),
+  },
+  {
+    path: 'trusted-users/detail/:id',
+    loadComponent: () => import('./trusted-users/pages/trusted-users-detail/trusted-users-detail.component').then(m => m.TrustedUsersDetailComponent),
+  },
 ];

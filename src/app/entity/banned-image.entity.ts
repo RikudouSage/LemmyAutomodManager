@@ -25,6 +25,6 @@ export class BannedImage extends AbstractEntity {
   providedIn: 'root',
 })
 export class BannedImageRepository extends AbstractRepository<BannedImage> {
-  public override resource: typeof AbstractEntity = BannedImage;
+  public override resource: typeof BannedImage = BannedImage;
   public override type: string = 'banned-image';
 }

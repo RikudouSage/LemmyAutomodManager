@@ -17,6 +17,6 @@ export class BannedEmail extends AbstractEntity {
   providedIn: 'root',
 })
 export class BannedEmailRepository extends AbstractRepository<BannedEmail> {
-    public override resource: typeof AbstractEntity = BannedEmail;
+    public override resource: typeof BannedEmail = BannedEmail;
     public override type: string = 'banned-email';
 }

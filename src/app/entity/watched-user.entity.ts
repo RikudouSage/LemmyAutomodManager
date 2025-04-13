@@ -17,6 +17,6 @@ export class WatchedUser extends AbstractEntity {
   providedIn: 'root',
 })
 export class WatchedUserRepository extends AbstractRepository<WatchedUser> {
-    public override resource: typeof AbstractEntity = WatchedUser;
+    public override resource: typeof WatchedUser = WatchedUser;
     public override type: string = 'watched-user';
 }

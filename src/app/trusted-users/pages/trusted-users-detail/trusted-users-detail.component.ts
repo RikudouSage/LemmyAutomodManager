@@ -1,34 +1,36 @@
 import {Component, OnInit, signal} from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {WatchedUser, WatchedUserRepository} from "../../../entity/watched-user.entity";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TranslatorService} from "../../../services/translator.service";
 import {TitleService} from "../../../services/title.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {toPromise} from "../../../helper/resolvable";
 import {defaultDetailDeleteCallback, defaultSaveCallback} from "../../../helper/default-implementations";
-import {WatchedUser, WatchedUserRepository} from "../../../entity/watched-user.entity";
+import {AlertComponent, AlertType} from "../../../root/components/alert/alert.component";
+import {TrustedUser, TrustedUserRepository} from "../../../entity/trusted-user.entity";
 import {LoaderComponent} from "../../../root/components/loader/loader.component";
 import {TranslocoMarkupComponent} from "ngx-transloco-markup";
 import {TranslocoPipe} from "@jsverse/transloco";
-import {AlertComponent, AlertType} from "../../../root/components/alert/alert.component";
 
 @Component({
-  selector: 'app-watched-users-detail',
+  selector: 'app-trusted-users-detail',
   standalone: true,
   imports: [
+    AlertComponent,
+    FormsModule,
     LoaderComponent,
     ReactiveFormsModule,
     TranslocoMarkupComponent,
-    TranslocoPipe,
-    AlertComponent
+    TranslocoPipe
   ],
-  templateUrl: './watched-users-detail.component.html',
-  styleUrl: './watched-users-detail.component.scss'
+  templateUrl: './trusted-users-detail.component.html',
+  styleUrl: './trusted-users-detail.component.scss'
 })
-export class WatchedUsersDetailComponent implements OnInit {
+export class TrustedUsersDetailComponent implements OnInit {
   protected readonly AlertType = AlertType;
 
-  private item = signal<WatchedUser | null>(null);
+  private item = signal<TrustedUser | null>(null);
 
   protected itemId = signal(0);
   protected loading = signal(true);
@@ -44,7 +46,7 @@ export class WatchedUsersDetailComponent implements OnInit {
     private readonly translator: TranslatorService,
     private readonly titleService: TitleService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly repository: WatchedUserRepository,
+    private readonly repository: TrustedUserRepository,
     private readonly toastr: ToastrService,
     private readonly router: Router,
   ) {
@@ -55,13 +57,13 @@ export class WatchedUsersDetailComponent implements OnInit {
       this.itemId.set(Number(params['id'] as string | undefined ?? null));
 
       if (this.itemId()) {
-        this.titleService.title.set(await toPromise(this.translator.get('app.watched_users.edit.title', {id: this.itemId()})));
+        this.titleService.title.set(await toPromise(this.translator.get('app.trusted_users.edit.title', {id: this.itemId()})));
         const item = await toPromise(this.repository.get(this.itemId()));
         this.form.patchValue(item.attributes);
         this.item.set(item);
       } else {
-        this.titleService.title.set(await toPromise(this.translator.get('app.watched_users.add.title')));
-        this.item.set(new WatchedUser(false))
+        this.titleService.title.set(await toPromise(this.translator.get('app.trusted_users.add.title')));
+        this.item.set(new TrustedUser(false))
       }
       this.loading.set(false);
     });
@@ -85,7 +87,7 @@ export class WatchedUsersDetailComponent implements OnInit {
       this.repository,
       this.item,
       this.router,
-      `/watched-users/detail/%id%`,
+      `/trusted-users/detail/%id%`,
     )();
   }
 
@@ -95,7 +97,7 @@ export class WatchedUsersDetailComponent implements OnInit {
       this.repository,
       this.item,
       this.router,
-      '/watched-users',
+      '/trusted-users',
       this.toastr,
       this.translator,
     )();

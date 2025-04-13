@@ -72,5 +72,10 @@
   "app.watched_users.name": "Watched users",
   "app.watched_users.description": "The users in this table are actively watched and any post or comment by them is sent to you using the notification channels you have configured, additionally any report of a private message, post or comment by them is also sent to you.",
   "app.watched_users.edit.title": "Edit watched user with id '{{id}}'",
-  "app.watched_users.add.title": "Add watched user"
+  "app.watched_users.add.title": "Add watched user",
+
+  "app.trusted_users.name": "Trusted users",
+  "app.trusted_users.description": "Any report by a person in this table gets automatically resolved and the offending content removed. The content only gets removed, the creator is [b]not[/b] banned.",
+  "app.trusted_users.edit.title": "Edit trusted user with id '{{id}}'",
+  "app.trusted_users.add.title": "Add trusted user"
 }

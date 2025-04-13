@@ -18,6 +18,6 @@ export class InstanceBanRegex extends AbstractEntity {
   providedIn: 'root',
 })
 export class InstanceBanRegexRepository extends AbstractRepository<InstanceBanRegex> {
-    public override resource: typeof AbstractEntity = InstanceBanRegex;
+    public override resource: typeof InstanceBanRegex = InstanceBanRegex;
     public override type: string = 'instance-ban-regex';
 }

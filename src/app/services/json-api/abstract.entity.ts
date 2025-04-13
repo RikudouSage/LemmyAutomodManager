@@ -3,7 +3,7 @@ import {DocumentCollection} from './document-collection';
 import {toPromise} from "../../helper/resolvable";
 
 export interface Relationships {
-  [key: string]: Observable<DocumentCollection<AbstractEntity> | AbstractEntity>;
+  [key: string]: Observable<DocumentCollection<AbstractEntity> | AbstractEntity | null>;
 }
 
 interface DataObject {
