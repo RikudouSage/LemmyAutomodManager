@@ -101,4 +101,16 @@ export const routes: Routes = [
     path: 'qr-code-bans/detail/:id',
     loadComponent: () => import('./qr-code-bans/pages/qr-code-bans-detail/qr-code-bans-detail.component').then(m => m.QrCodeBansDetailComponent),
   },
+  {
+    path: 'auto-approval',
+    loadComponent: () => import('./auto-approval/pages/auto-approval-list/auto-approval-list.component').then(m => m.AutoApprovalListComponent),
+  },
+  {
+    path: 'auto-approval/add',
+    loadComponent: () => import('./auto-approval/pages/auto-approval-detail/auto-approval-detail.component').then(m => m.AutoApprovalDetailComponent),
+  },
+  {
+    path: 'auto-approval/detail/:id',
+    loadComponent: () => import('./auto-approval/pages/auto-approval-detail/auto-approval-detail.component').then(m => m.AutoApprovalDetailComponent),
+  },
 ];

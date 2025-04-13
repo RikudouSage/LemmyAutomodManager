@@ -105,5 +105,10 @@
   "app.qr_code_bans.name": "Banned QR codes",
   "app.qr_code_bans.description": "Every post url that contains an image is scanned for QR codes and if a QR code matches any of the regexes below, the user is banned.",
   "app.qr_code_bans.edit.title": "Edit banned qr code with id '{{id}}'",
-  "app.qr_code_bans.add.title": "Add banned qr code"
+  "app.qr_code_bans.add.title": "Add banned qr code",
+
+  "app.auto_approval.name": "Auto approval",
+  "app.auto_approval.description": "Users whose application form matches any of the following regexes will be approved automatically without waiting for manual review.",
+  "app.auto_approval.edit.title": "Edit auto approval rule with id '{{id}}'",
+  "app.auto_approval.add.title": "Add auto approval rule"
 }
