@@ -77,4 +77,16 @@ export const routes: Routes = [
     path: 'trusted-users/detail/:id',
     loadComponent: () => import('./trusted-users/pages/trusted-users-detail/trusted-users-detail.component').then(m => m.TrustedUsersDetailComponent),
   },
+  {
+    path: 'ignored-users',
+    loadComponent: () => import('./ignored-users/pages/ignored-users-list/ignored-users-list.component').then(m => m.IgnoredUsersListComponent),
+  },
+  {
+    path: 'ignored-users/add',
+    loadComponent: () => import('./ignored-users/pages/ignored-users-detail/ignored-users-detail.component').then(m => m.IgnoredUsersDetailComponent),
+  },
+  {
+    path: 'ignored-users/detail/:id',
+    loadComponent: () => import('./ignored-users/pages/ignored-users-detail/ignored-users-detail.component').then(m => m.IgnoredUsersDetailComponent),
+  },
 ];
