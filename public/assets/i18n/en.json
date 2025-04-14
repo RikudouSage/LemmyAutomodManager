@@ -57,6 +57,8 @@
   "app.column.user_id.description": "The user id of the target user, this is an internal id that's not very visible on the UI, but it can be fetched using api or from the database.",
   "app.column.ban_moderators": "Ban moderators",
   "app.column.ban_moderators.description": "If enabled, all moderators of the community will be banned if the regex matches.",
+  "app.column.comment_id": "Comment ID",
+  "app.column.comment_id.description": "The numeric comment ID local to your instance, you can grab it as the last path segment from the comment link.",
 
   "app.stats.name": "Stats & config",
   "app.stats.in_queue": "Jobs to process",
@@ -126,5 +128,10 @@
   "app.community_remove_regexes.name": "Community removal",
   "app.community_remove_regexes.description": "Regexes in this table will be matched against a community's name, title and description when the community gets created or updated.",
   "app.community_remove_regexes.edit.title": "Edit community removal rule with id '{{id}}'",
-  "app.community_remove_regexes.add.title": "Add community removal rule"
+  "app.community_remove_regexes.add.title": "Add community removal rule",
+
+  "app.ignored_comments.name": "Ignored comments",
+  "app.ignored_comments.description": "These comments won't be checked by other rules. Useful if the comment triggers a false positive, you restore it and then want to avoid triggering it again.",
+  "app.ignored_comments.add.title": "Add ignored comment",
+  "app.ignored_comments.edit.title": "Edit ignored comment with id '{{id}}'"
 }

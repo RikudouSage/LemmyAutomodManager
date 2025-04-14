@@ -6,17 +6,18 @@ import {
 import {AbstractEntity} from "../../../services/json-api/abstract.entity";
 import {TranslatorService} from "../../../services/translator.service";
 import {TitleService} from "../../../services/title.service";
+import {WatchedUserRepository} from "../../../entity/watched-user.entity";
 import {ToastrService} from "ngx-toastr";
 import {defaultDeleteCallback} from "../../../helper/default-implementations";
 import {toPromise} from "../../../helper/resolvable";
-import {WatchedUserRepository} from "../../../entity/watched-user.entity";
+import {IgnoredCommentRepository} from "../../../entity/ignored-comment.entity";
 import {FormatNumberPipe} from "../../../pipes/format-number.pipe";
 import {RouterLink} from "@angular/router";
 import {TranslocoMarkupComponent} from "ngx-transloco-markup";
 import {TranslocoPipe} from "@jsverse/transloco";
 
 @Component({
-  selector: 'app-watched-users-list',
+  selector: 'app-ignored-comments-list',
   standalone: true,
   imports: [
     DataListTableComponent,
@@ -25,23 +26,23 @@ import {TranslocoPipe} from "@jsverse/transloco";
     TranslocoMarkupComponent,
     TranslocoPipe
   ],
-  templateUrl: './watched-users-list.component.html',
-  styleUrl: './watched-users-list.component.scss'
+  templateUrl: './ignored-comments-list.component.html',
+  styleUrl: './ignored-comments-list.component.scss'
 })
-export class WatchedUsersListComponent implements OnInit {
+export class IgnoredCommentsListComponent implements OnInit {
   protected deleteItemCallback: WritableSignal<DeleteCallback<AbstractEntity>>;
   protected totalCount = signal(0);
 
   constructor(
     private readonly translator: TranslatorService,
     private readonly titleService: TitleService,
-    public readonly repository: WatchedUserRepository,
+    public readonly repository: IgnoredCommentRepository,
     toastr: ToastrService,
   ) {
     this.deleteItemCallback = signal(defaultDeleteCallback(this.repository, toastr, this.translator));
   }
 
   public async ngOnInit(): Promise<void> {
-    this.titleService.title.set(await toPromise(this.translator.get('app.watched_users.name')));
+    this.titleService.title.set(await toPromise(this.translator.get('app.ignored_comments.name')));
   }
 }

@@ -137,4 +137,16 @@ export const routes: Routes = [
     path: 'community-remove-regexes/detail/:id',
     loadComponent: () => import('./community-remove-regexes/pages/community-remove-regexes-detail/community-remove-regexes-detail.component').then(m => m.CommunityRemoveRegexesDetailComponent),
   },
+  {
+    path: 'ignored-comments',
+    loadComponent: () => import('./ignored-comments/pages/ignored-comments-list/ignored-comments-list.component').then(m => m.IgnoredCommentsListComponent),
+  },
+  {
+    path: 'ignored-comments/add',
+    loadComponent: () => import('./ignored-comments/pages/ignored-comments-detail/ignored-comments-detail.component').then(m => m.IgnoredCommentsDetailComponent),
+  },
+  {
+    path: 'ignored-comments/detail/:id',
+    loadComponent: () => import('./ignored-comments/pages/ignored-comments-detail/ignored-comments-detail.component').then(m => m.IgnoredCommentsDetailComponent),
+  },
 ];
