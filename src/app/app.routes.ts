@@ -125,4 +125,16 @@ export const routes: Routes = [
     path: 'banned-usernames/detail/:id',
     loadComponent: () => import('./banned-usernames/pages/banned-usernames-detail/banned-usernames-detail.component').then(m => m.BannedUsernamesDetailComponent),
   },
+  {
+    path: 'community-remove-regexes',
+    loadComponent: () => import('./community-remove-regexes/pages/community-remove-regexes-list/community-remove-regexes-list.component').then(m => m.CommunityRemoveRegexesListComponent),
+  },
+  {
+    path: 'community-remove-regexes/add',
+    loadComponent: () => import('./community-remove-regexes/pages/community-remove-regexes-detail/community-remove-regexes-detail.component').then(m => m.CommunityRemoveRegexesDetailComponent),
+  },
+  {
+    path: 'community-remove-regexes/detail/:id',
+    loadComponent: () => import('./community-remove-regexes/pages/community-remove-regexes-detail/community-remove-regexes-detail.component').then(m => m.CommunityRemoveRegexesDetailComponent),
+  },
 ];

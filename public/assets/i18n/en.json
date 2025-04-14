@@ -55,6 +55,8 @@
   "app.column.instance.description": "The instance domain of the target user.",
   "app.column.user_id": "User ID",
   "app.column.user_id.description": "The user id of the target user, this is an internal id that's not very visible on the UI, but it can be fetched using api or from the database.",
+  "app.column.ban_moderators": "Ban moderators",
+  "app.column.ban_moderators.description": "If enabled, all moderators of the community will be banned if the regex matches.",
 
   "app.stats.name": "Stats & config",
   "app.stats.in_queue": "Jobs to process",
@@ -119,5 +121,10 @@
   "app.banned_usernames.name": "Banned usernames",
   "app.banned_usernames.description": "Regexes in this table are checked against a username whenever a new post or comment is created. It's similar to [b][link:banRegexesLink]{{app.ban_regexes.name}}[/link][/b], except the scope is narrower here - only usernames are checked.",
   "app.banned_usernames.edit.title": "Edit banned username with id '{{id}}'",
-  "app.banned_usernames.add.title": "Add banned username"
+  "app.banned_usernames.add.title": "Add banned username",
+
+  "app.community_remove_regexes.name": "Community removal",
+  "app.community_remove_regexes.description": "Regexes in this table will be matched against a community's name, title and description when the community gets created or updated.",
+  "app.community_remove_regexes.edit.title": "Edit community removal rule with id '{{id}}'",
+  "app.community_remove_regexes.add.title": "Add community removal rule"
 }
