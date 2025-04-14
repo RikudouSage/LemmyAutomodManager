@@ -113,4 +113,16 @@ export const routes: Routes = [
     path: 'auto-approval/detail/:id',
     loadComponent: () => import('./auto-approval/pages/auto-approval-detail/auto-approval-detail.component').then(m => m.AutoApprovalDetailComponent),
   },
+  {
+    path: 'banned-usernames',
+    loadComponent: () => import('./banned-usernames/pages/banned-usernames-list/banned-usernames-list.component').then(m => m.BannedUsernamesListComponent),
+  },
+  {
+    path: 'banned-usernames/add',
+    loadComponent: () => import('./banned-usernames/pages/banned-usernames-detail/banned-usernames-detail.component').then(m => m.BannedUsernamesDetailComponent),
+  },
+  {
+    path: 'banned-usernames/detail/:id',
+    loadComponent: () => import('./banned-usernames/pages/banned-usernames-detail/banned-usernames-detail.component').then(m => m.BannedUsernamesDetailComponent),
+  },
 ];

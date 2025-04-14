@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">{{'app.description' | transloco}}</h3>
+      </div>
+      <div class="card-body">
+        <transloco key="app.banned_usernames.description" [params]="{banRegexesLink: {route: '/ban-regexes'}}" />
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <h3 class="card-title flex-grow-1">{{'app.items' | transloco}} ({{totalCount() | formatNumber}})</h3>
+        <div class="flex-grow-0"><a routerLink="/banned-usernames/add">{{'app.add_new' | transloco}}</a></div>
+      </div>
+      <div class="card-body">
+        <app-data-list-table
+          [repository]="repository"
+          identifierField="id"
+          detailUrl="/banned-usernames/detail/%value%"
+          [deleteCallback]="deleteItemCallback()"
+          [columnNames]="{username: 'app.column.regex' | transloco}"
+
+          (totalCountResolved)="totalCount.set($event)"
+        />
+      </div>
+    </div>
+  </div>
+</div>
