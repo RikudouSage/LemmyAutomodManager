@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">{{'app.description' | transloco}}</h3>
+      </div>
+      <div class="card-body">
+        <transloco key="app.instance_defederations.description" />
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <h3 class="card-title flex-grow-1">{{'app.items' | transloco}} ({{totalCount() | formatNumber}})</h3>
+        <div class="flex-grow-0"><a routerLink="/instance-defederations/add">{{'app.add_new' | transloco}}</a></div>
+      </div>
+      <div class="card-body">
+        <app-data-list-table
+          [repository]="repository"
+          identifierField="id"
+          detailUrl="/instance-defederations/detail/%value%"
+          [deleteCallback]="deleteItemCallback()"
+          [columnNames]="{
+            allowOpenRegistrations: 'app.column.allow_open_registrations' | transloco,
+            allowOpenRegistrationsWithCaptcha: 'app.column.allow_open_registrations_with_captcha' | transloco,
+            allowOpenRegistrationsWithEmailVerification: 'app.column.allow_open_registrations_with_email_verification' | transloco,
+            allowOpenRegistrationsWithApplication: 'app.column.allow_open_registrations_with_application' | transloco,
+            treatMissingDataAs: 'app.column.treat_missing_data_as' | transloco,
+            minimumVersion: 'app.column.minimum_version' | transloco,
+            evidence: 'app.column.defederate_evidence' | transloco,
+            reason: 'app.column.defederate_reason' | transloco,
+          }"
+
+          (totalCountResolved)="totalCount.set($event)"
+        />
+      </div>
+    </div>
+  </div>
+</div>

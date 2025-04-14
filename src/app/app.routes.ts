@@ -173,4 +173,16 @@ export const routes: Routes = [
     path: 'report-regexes/detail/:id',
     loadComponent: () => import('./report-regexes/pages/report-regexes-detail/report-regexes-detail.component').then(m => m.ReportRegexesDetailComponent),
   },
+  {
+    path: 'instance-defederations',
+    loadComponent: () => import('./instance-defederations/pages/instance-defederations-list/instance-defederations-list.component').then(m => m.InstanceDefederationsListComponent),
+  },
+  {
+    path: 'instance-defederations/add',
+    loadComponent: () => import('./instance-defederations/pages/instance-defederations-detail/instance-defederations-detail.component').then(m => m.InstanceDefederationsDetailComponent),
+  },
+  {
+    path: 'instance-defederations/detail/:id',
+    loadComponent: () => import('./instance-defederations/pages/instance-defederations-detail/instance-defederations-detail.component').then(m => m.InstanceDefederationsDetailComponent),
+  },
 ];

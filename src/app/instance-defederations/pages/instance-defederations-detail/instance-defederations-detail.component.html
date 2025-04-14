@@ -1,0 +1,145 @@
+@if (loading()) {
+  <app-loader />
+} @else {
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="form-group">
+              <label for="inputSoftware">{{'app.column.defederate_software' | transloco}}</label>
+              <input class="form-control" id="inputSoftware" formControlName="software" aria-describedby="inputSoftwareDescription" />
+              <small id="inputSoftwareDescription">
+                <transloco key="app.column.defederate_software.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <app-yes-no-null formControlName="allowOpenRegistrations" [label]="'app.column.allow_open_registrations' | transloco" />
+              <small>
+                <transloco key="app.column.allow_open_registrations.description" />
+              </small>
+            </div>
+            @if (form.value.allowOpenRegistrations === false) {
+              <div class="form-group">
+                <app-yes-no-null formControlName="allowOpenRegistrationsWithCaptcha" [label]="'app.column.allow_open_registrations_with_captcha' | transloco" />
+                <small>
+                  <transloco key="app.column.allow_open_registrations_with_captcha.description" />
+                </small>
+              </div>
+              <div class="form-group">
+                <app-yes-no-null formControlName="allowOpenRegistrationsWithEmailVerification" [label]="'app.column.allow_open_registrations_with_email_verification' | transloco" />
+                <small>
+                  <transloco key="app.column.allow_open_registrations_with_email_verification.description" />
+                </small>
+              </div>
+              <div class="form-group">
+                <app-yes-no-null formControlName="allowOpenRegistrationsWithApplication" [label]="'app.column.allow_open_registrations_with_application' | transloco" />
+                <small>
+                  <transloco key="app.column.allow_open_registrations_with_application.description" />
+                </small>
+              </div>
+            }
+            <div class="form-group">
+              <app-yes-no-null formControlName="treatMissingDataAs" [label]="'app.column.treat_missing_data_as' | transloco" />
+              <small>
+                <transloco key="app.column.treat_missing_data_as.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputMinimumVersion">{{'app.column.minimum_version' | transloco}}</label>
+              <input class="form-control" type="text" id="inputMinimumVersion" formControlName="minimumVersion" aria-describedby="inputMinimumVersionDescription" />
+              <small id="inputMinimumVersionDescription">
+                <transloco key="app.column.minimum_version.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputReason">{{'app.column.defederate_reason' | transloco}}</label>
+              <textarea class="form-control" formControlName="reason" aria-describedby="inputReasonDescription" id="inputReason"></textarea>
+              <small id="inputReasonDescription">
+                <transloco key="app.column.defederate_reason.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputEvidence">{{'app.column.defederate_evidence' | transloco}}</label>
+              <textarea class="form-control" formControlName="evidence" aria-describedby="inputEvidenceDescription" id="inputEvidence"></textarea>
+              <small id="inputEvidenceDescription">
+                <transloco key="app.column.defederate_evidence.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <app-checkbox formControlName="enabled" [label]="'app.column.enabled' | transloco" />
+              <small>
+                <transloco key="app.column.enabled.description" />
+              </small>
+            </div>
+
+            <button class="btn btn-primary" type="submit" [disabled]="!form.valid">{{'app.save' | transloco}}</button>
+            @if (itemId()) {
+              &nbsp;
+              <button class="btn btn-danger" type="button" (click)="removeItem()">{{'app.remove' | transloco}}</button>
+            }
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">{{'app.instance_defederations.enriched_data_matrix' | transloco}}</h4>
+        </div>
+        <div class="card-body">
+          <transloco key="app.instance_defederations.enriched_data_matrix.description" />
+          <table class="table table-striped">
+            <tr>
+              <th>{{'app.software' | transloco}}</th>
+              <th>{{'app.instance_defederations.supported_data.version' | transloco}}</th>
+              <th>{{'app.instance_defederations.supported_data.open_registrations' | transloco}}</th>
+              <th>{{'app.instance_defederations.supported_data.captcha' | transloco}}</th>
+              <th>{{'app.instance_defederations.supported_data.email_verification' | transloco}}</th>
+              <th>{{'app.instance_defederations.supported_data.applications' | transloco}}</th>
+            </tr>
+            <tr>
+              <td>Lemmy</td>
+              <td><app-yes-no [value]="true" /></td>
+              <td><app-yes-no [value]="true" /></td>
+              <td><app-yes-no [value]="true" /></td>
+              <td><app-yes-no [value]="true" /></td>
+              <td><app-yes-no [value]="true" /></td>
+            </tr>
+            <tr>
+              <td>Mastodon / Pixelfed / Akkoma</td>
+              <td><app-yes-no [value]="true" /></td>
+              <td><app-yes-no [value]="true" /></td>
+              <td><app-yes-no [value]="false" /></td>
+              <td><app-yes-no [value]="true" /> ({{'app.instance_defederations.enriched_data_matrix.always_true' | transloco}})</td>
+              <td><app-yes-no [value]="true" /> ({{'app.instance_defederations.enriched_data_matrix.sometimes_unknown' | transloco}})</td>
+            </tr>
+            <tr>
+              <td>Misskey</td>
+              <td><app-yes-no [value]="true" /></td>
+              <td><app-yes-no [value]="true" /></td>
+              <td><app-yes-no [value]="true" /></td>
+              <td><app-yes-no [value]="true" /> ({{'app.instance_defederations.enriched_data_matrix.sometimes_unknown' | transloco}})</td>
+              <td><app-yes-no [value]="true" /> ({{'app.instance_defederations.enriched_data_matrix.always_false' | transloco}})</td>
+            </tr>
+            <tr>
+              <td>Pleroma</td>
+              <td><app-yes-no [value]="true" /></td>
+              <td><app-yes-no [value]="true" /></td>
+              <td><app-yes-no [value]="false" /></td>
+              <td><app-yes-no [value]="true" /> ({{'app.instance_defederations.enriched_data_matrix.sometimes_unknown' | transloco}})</td>
+              <td><app-yes-no [value]="true" /> ({{'app.instance_defederations.enriched_data_matrix.sometimes_unknown' | transloco}})</td>
+            </tr>
+            <tr>
+              <td>{{'app.instance_defederations.enriched_data.other_software' | transloco}}</td>
+              <td><app-yes-no [value]="true" /></td>
+              <td><app-yes-no [value]="true" /></td>
+              <td><app-yes-no [value]="false" /></td>
+              <td><app-yes-no [value]="false" /></td>
+              <td><app-yes-no [value]="false" /></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+}
