@@ -42,6 +42,6 @@ export class PrivateMessageBansListComponent implements OnInit {
   }
 
   public async ngOnInit(): Promise<void> {
-    this.titleService.title.set(await toPromise(this.translator.get('app.banned_emails.name')));
+    this.titleService.title.set(await toPromise(this.translator.get('app.private_message_bans.name')));
   }
 }
