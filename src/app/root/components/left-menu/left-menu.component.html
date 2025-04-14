@@ -1,82 +1,19 @@
 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-  <li class="nav-item">
-    <a routerLink="/ban-regexes" class="nav-link">
-      <i class="nav-icon fas fa-server"></i>
-      <p>
-        {{ "app.ban_regexes.name" | transloco }}
-      </p>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a routerLink="/banned-emails" class="nav-link">
-      <i class="nav-icon fas fa-at"></i>
-      <p>
-        {{ "app.banned_emails.name" | transloco }}
-      </p>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a routerLink="/private-message-bans" class="nav-link">
-      <i class="nav-icon fas fa-comments"></i>
-      <p>
-        {{ "app.private_message_bans.name" | transloco }}
-      </p>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a routerLink="/banned-images" class="nav-link">
-      <i class="nav-icon fas fa-images"></i>
-      <p>
-        {{ "app.banned_images.name" | transloco }}
-      </p>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a routerLink="/watched-users" class="nav-link">
-      <i class="nav-icon fas fa-eye"></i>
-      <p>
-        {{ "app.watched_users.name" | transloco }}
-      </p>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a routerLink="/trusted-users" class="nav-link">
-      <i class="nav-icon fas fa-user-shield"></i>
-      <p>
-        {{ "app.trusted_users.name" | transloco }}
-      </p>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a routerLink="/ignored-users" class="nav-link">
-      <i class="nav-icon fas fa-user-secret"></i>
-      <p>
-        {{ "app.ignored_users.name" | transloco }}
-      </p>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a routerLink="/qr-code-bans" class="nav-link">
-      <i class="nav-icon fas fa-qrcode"></i>
-      <p>
-        {{ "app.qr_code_bans.name" | transloco }}
-      </p>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a routerLink="/auto-approval" class="nav-link">
-      <i class="nav-icon fas fa-user-check"></i>
-      <p>
-        {{ "app.auto_approval.name" | transloco }}
-      </p>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a routerLink="/banned-usernames" class="nav-link">
-      <i class="nav-icon fas fa-user-slash"></i>
-      <p>
-        {{ "app.banned_usernames.name" | transloco }}
-      </p>
-    </a>
-  </li>
+  <li class="nav-header">{{'app.regexes' | transloco}}</li>
+  <app-nav-item class="nav-item" link="/ban-regexes" icon="fa-server" [title]="'app.ban_regexes.name' | transloco" />
+  <app-nav-item class="nav-item" link="/private-message-bans" icon="fa-comments" [title]="'app.private_message_bans.name' | transloco" />
+  <app-nav-item class="nav-item" link="/banned-emails" icon="fa-at" [title]="'app.banned_emails.name' | transloco" />
+  <app-nav-item class="nav-item" link="/banned-usernames" icon="fa-user-slash" [title]="'app.banned_usernames.name' | transloco" />
+
+  <li class="nav-header">{{'app.images' | transloco}}</li>
+  <app-nav-item class="nav-item" link="/banned-images" icon="fa-images" [title]="'app.banned_images.name' | transloco" />
+  <app-nav-item class="nav-item" link="/qr-code-bans" icon="fa-qrcode" [title]="'app.qr_code_bans.name' | transloco" />
+
+  <li class="nav-header">{{'app.users' | transloco}}</li>
+  <app-nav-item class="nav-item" link="/watched-users" icon="fa-eye" [title]="'app.watched_users.name' | transloco" />
+  <app-nav-item class="nav-item" link="/trusted-users" icon="fa-user-shield" [title]="'app.trusted_users.name' | transloco" />
+  <app-nav-item class="nav-item" link="/ignored-users" icon="fa-user-secret" [title]="'app.ignored_users.name' | transloco" />
+
+  <li class="nav-header">{{'app.miscellaneous' | transloco}}</li>
+  <app-nav-item class="nav-item" link="/auto-approval" icon="fa-user-check" [title]="'app.auto_approval.name' | transloco" />
 </ul>
