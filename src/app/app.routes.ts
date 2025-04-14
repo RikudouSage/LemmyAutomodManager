@@ -149,4 +149,16 @@ export const routes: Routes = [
     path: 'ignored-comments/detail/:id',
     loadComponent: () => import('./ignored-comments/pages/ignored-comments-detail/ignored-comments-detail.component').then(m => m.IgnoredCommentsDetailComponent),
   },
+  {
+    path: 'ignored-posts',
+    loadComponent: () => import('./ignored-posts/pages/ignored-posts-list/ignored-posts-list.component').then(m => m.IgnoredPostsListComponent),
+  },
+  {
+    path: 'ignored-posts/add',
+    loadComponent: () => import('./ignored-posts/pages/ignored-posts-detail/ignored-posts-detail.component').then(m => m.IgnoredPostsDetailComponent),
+  },
+  {
+    path: 'ignored-posts/detail/:id',
+    loadComponent: () => import('./ignored-posts/pages/ignored-posts-detail/ignored-posts-detail.component').then(m => m.IgnoredPostsDetailComponent),
+  },
 ];

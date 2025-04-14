@@ -1,4 +1,5 @@
 import {Component, OnInit, signal} from '@angular/core';
+import {IgnoredComment, IgnoredCommentRepository} from "../../../entity/ignored-comment.entity";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TranslatorService} from "../../../services/translator.service";
 import {TitleService} from "../../../services/title.service";
@@ -6,13 +7,13 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {toPromise} from "../../../helper/resolvable";
 import {defaultDetailDeleteCallback, defaultSaveCallback} from "../../../helper/default-implementations";
-import {IgnoredComment, IgnoredCommentRepository} from "../../../entity/ignored-comment.entity";
+import {IgnoredPost, IgnoredPostRepository} from "../../../entity/ignored-post.entity";
 import {LoaderComponent} from "../../../root/components/loader/loader.component";
 import {TranslocoMarkupComponent} from "ngx-transloco-markup";
 import {TranslocoPipe} from "@jsverse/transloco";
 
 @Component({
-  selector: 'app-ignored-comments-detail',
+  selector: 'app-ignored-posts-detail',
   standalone: true,
   imports: [
     LoaderComponent,
@@ -20,24 +21,24 @@ import {TranslocoPipe} from "@jsverse/transloco";
     TranslocoMarkupComponent,
     TranslocoPipe
   ],
-  templateUrl: './ignored-comments-detail.component.html',
-  styleUrl: './ignored-comments-detail.component.scss'
+  templateUrl: './ignored-posts-detail.component.html',
+  styleUrl: './ignored-posts-detail.component.scss'
 })
-export class IgnoredCommentsDetailComponent implements OnInit {
-  private item = signal<IgnoredComment | null>(null);
+export class IgnoredPostsDetailComponent implements OnInit {
+  private item = signal<IgnoredPost | null>(null);
 
   protected itemId = signal(0);
   protected loading = signal(true);
 
   protected form = new FormGroup({
-    commentId: new FormControl<number | null>(null, [Validators.required]),
+    postId: new FormControl<number | null>(null, [Validators.required]),
   });
 
   constructor(
     private readonly translator: TranslatorService,
     private readonly titleService: TitleService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly repository: IgnoredCommentRepository,
+    private readonly repository: IgnoredPostRepository,
     private readonly toastr: ToastrService,
     private readonly router: Router,
   ) {
@@ -48,13 +49,13 @@ export class IgnoredCommentsDetailComponent implements OnInit {
       this.itemId.set(Number(params['id'] as string | undefined ?? null));
 
       if (this.itemId()) {
-        this.titleService.title.set(await toPromise(this.translator.get('app.ignored_comments.edit.title', {id: this.itemId()})));
+        this.titleService.title.set(await toPromise(this.translator.get('app.ignored_posts.edit.title', {id: this.itemId()})));
         const item = await toPromise(this.repository.get(this.itemId()));
         this.form.patchValue(item.attributes);
         this.item.set(item);
       } else {
-        this.titleService.title.set(await toPromise(this.translator.get('app.ignored_comments.add.title')));
-        this.item.set(new IgnoredComment(false))
+        this.titleService.title.set(await toPromise(this.translator.get('app.ignored_posts.add.title')));
+        this.item.set(new IgnoredPost(false))
       }
       this.loading.set(false);
     });
@@ -68,14 +69,14 @@ export class IgnoredCommentsDetailComponent implements OnInit {
       this.loading,
       form => {
         this.item()!.attributes = {
-          commentId: form.value.commentId!,
+          postId: form.value.postId!,
         };
       },
       !this.itemId(),
       this.repository,
       this.item,
       this.router,
-      `/ignored-comments/detail/%id%`,
+      `/ignored-posts/detail/%id%`,
     )();
   }
 
@@ -85,7 +86,7 @@ export class IgnoredCommentsDetailComponent implements OnInit {
       this.repository,
       this.item,
       this.router,
-      '/ignored-comments',
+      '/ignored-posts',
       this.toastr,
       this.translator,
     )();

@@ -59,6 +59,8 @@
   "app.column.ban_moderators.description": "If enabled, all moderators of the community will be banned if the regex matches.",
   "app.column.comment_id": "Comment ID",
   "app.column.comment_id.description": "The numeric comment ID local to your instance, you can grab it as the last path segment from the comment link.",
+  "app.column.post_id": "Post ID",
+  "app.column.post_id.description": "The numeric post ID local to your instance, you can grab it as the last path segment from the post link.",
 
   "app.stats.name": "Stats & config",
   "app.stats.in_queue": "Jobs to process",
@@ -132,6 +134,11 @@
 
   "app.ignored_comments.name": "Ignored comments",
   "app.ignored_comments.description": "These comments won't be checked by other rules. Useful if the comment triggers a false positive, you restore it and then want to avoid triggering it again.",
+  "app.ignored_comments.edit.title": "Edit ignored comment with id '{{id}}'",
   "app.ignored_comments.add.title": "Add ignored comment",
-  "app.ignored_comments.edit.title": "Edit ignored comment with id '{{id}}'"
+
+  "app.ignored_posts.name": "Ignored posts",
+  "app.ignored_posts.description": "These posts won't be checked by other rules. Useful if the post triggers a false positive, you restore it and then want to avoid triggering it again.",
+  "app.ignored_posts.edit.title": "Edit ignored post with id '{{id}}'",
+  "app.ignored_posts.add.title": "Add ignored post"
 }

@@ -6,23 +6,23 @@
         <h3 class="card-title">{{'app.description' | transloco}}</h3>
       </div>
       <div class="card-body">
-        <transloco key="app.ignored_comments.description" />
+        <transloco key="app.ignored_posts.description" />
       </div>
     </div>
 
     <div class="card">
       <div class="card-header d-flex justify-content-between">
         <h3 class="card-title flex-grow-1">{{'app.items' | transloco}} ({{totalCount() | formatNumber}})</h3>
-        <div class="flex-grow-0"><a routerLink="/ignored-comments/add">{{'app.add_new' | transloco}}</a></div>
+        <div class="flex-grow-0"><a routerLink="/ignored-posts/add">{{'app.add_new' | transloco}}</a></div>
       </div>
       <div class="card-body">
         <app-data-list-table
           [repository]="repository"
           identifierField="id"
-          detailUrl="/ignored-comments/detail/%value%"
+          detailUrl="/ignored-posts/detail/%value%"
           [deleteCallback]="deleteItemCallback()"
           [columnNames]="{
-            commentId: 'app.column.comment_id' | transloco,
+            postId: 'app.column.post_id' | transloco,
           }"
 
           (totalCountResolved)="totalCount.set($event)"
