@@ -13,6 +13,16 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
+      - name: Extract Version Name
+        id: extract_name
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            if (context.payload.ref.startsWith('refs/tags/')) {
+              return context.payload.ref.replace(/refs\/tags\/v/, '');
+            }
+            return 'dev';
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Set up QEMU
@@ -25,6 +35,8 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create version variable
+        run: echo "window['APP_VERSION'] = '${{ steps.extract_version.outputs.result }}';" >> public/runtime-environment.js
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
