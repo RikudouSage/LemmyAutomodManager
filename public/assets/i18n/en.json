@@ -23,6 +23,9 @@
 
   "app.info.user_id_username_instance_mix_info": "In the form below you can fill out the [b]username[/b], [b]instance[/b] and [b]user id[/b], but you don't have to fill out all of them. The only field needed is the [b]user id[/b], but if you don't want to look it up, you can fill out [b]both username and instance[/b] and the user id will be fetched automatically when the rule is evaluated.",
 
+  "app.new_version_available.ui": "There's a new version of the Automod Manager available, tap this notification to open the repository.",
+  "app.new_version_available.api": "There's a new version of the Automod available, tap this notification to open the repository.",
+
   "app.error": "Error",
   "app.error.invalid_form": "The form is not valid.",
   "app.error.failed_saving": "There was an error while saving the item, please try again later.",

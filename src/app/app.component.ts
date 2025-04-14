@@ -17,6 +17,11 @@ import {TitleService} from "./services/title.service";
 import {LeftMenuComponent} from "./root/components/left-menu/left-menu.component";
 import {FooterComponent} from "./root/components/footer/footer.component";
 import {TopMenuComponent} from "./root/components/top-menu/top-menu.component";
+import {NewVersionCheckerService} from "./services/new-version-checker.service";
+import {ToastrService} from "ngx-toastr";
+import {TranslatorService} from "./services/translator.service";
+import {toPromise} from "./helper/resolvable";
+import {interval, timeout} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -42,6 +47,9 @@ export class AppComponent implements OnInit {
     @Inject(PLATFORM_ID) platformId: string,
     @Inject(DOCUMENT) private readonly document: Document,
     titleService: TitleService,
+    private readonly newVersionChecker: NewVersionCheckerService,
+    private readonly toastr: ToastrService,
+    private readonly translator: TranslatorService,
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
     this.title = titleService.title;
@@ -49,6 +57,34 @@ export class AppComponent implements OnInit {
 
   public async ngOnInit(): Promise<void> {
     this.calculateDarkMode();
+
+    if (this.isBrowser) {
+      const versionCheck = await this.newVersionChecker.newVersionCheck();
+      if (versionCheck.newUiVersionAvailable) {
+        const toast = this.toastr.info(
+          await toPromise(this.translator.get('app.new_version_available.ui')),
+          await toPromise(this.translator.get('app.info')),
+          {
+            disableTimeOut: true,
+          }
+        );
+        toast.onTap.subscribe(() => {
+          window.open('https://github.com/RikudouSage/LemmyAutomodManager', '_blank');
+        });
+      }
+      if (versionCheck.newApiVersionAvailable) {
+        const toast = this.toastr.info(
+          await toPromise(this.translator.get('app.new_version_available.api')),
+          await toPromise(this.translator.get('app.info')),
+          {
+            disableTimeOut: true,
+          }
+        );
+        toast.onTap.subscribe(() => {
+          window.open('https://github.com/RikudouSage/LemmyAutomod', '_blank');
+        });
+      }
+    }
   }
 
   public async toggleSideMenu(): Promise<void> {
