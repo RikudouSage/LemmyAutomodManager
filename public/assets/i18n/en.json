@@ -61,6 +61,10 @@
   "app.column.comment_id.description": "The numeric comment ID local to your instance, you can grab it as the last path segment from the comment link.",
   "app.column.post_id": "Post ID",
   "app.column.post_id.description": "The numeric post ID local to your instance, you can grab it as the last path segment from the post link.",
+  "app.column.report_message": "Message",
+  "app.column.report_message.description": "The message that will be sent either as the report text or as the notification text.",
+  "app.column.report_private": "Private",
+  "app.column.report_private.description": "If enabled, the comment won't be reported using Lemmy, but only sent as a notification to your notification channels.",
 
   "app.stats.name": "Stats & config",
   "app.stats.in_queue": "Jobs to process",
@@ -140,5 +144,10 @@
   "app.ignored_posts.name": "Ignored posts",
   "app.ignored_posts.description": "These posts won't be checked by other rules. Useful if the post triggers a false positive, you restore it and then want to avoid triggering it again.",
   "app.ignored_posts.edit.title": "Edit ignored post with id '{{id}}'",
-  "app.ignored_posts.add.title": "Add ignored post"
+  "app.ignored_posts.add.title": "Add ignored post",
+
+  "app.report_regexes.name": "Report regexes",
+  "app.report_regexes.description": "Posts and comments matching any of the regexes below will be reported with the message you set. You can choose to report using the Lemmy reporting system or privately using your notification channels. The same fields as for [b][link:banRegexesLink]{{app.ban_regexes.name}}[/link][/b] is used.",
+  "app.report_regexes.edit.title": "Edit report regex with id '{{id}}'",
+  "app.report_regexes.add.title": "Add report regex"
 }

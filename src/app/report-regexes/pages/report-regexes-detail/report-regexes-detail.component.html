@@ -1,0 +1,46 @@
+@if (loading()) {
+  <app-loader />
+} @else {
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="form-group">
+              <label for="inputRegex">{{'app.column.regex' | transloco}}</label>
+              <input class="form-control" id="inputRegex" formControlName="regex" aria-describedby="inputRegexDescription" />
+              <small id="inputRegexDescription">
+                <transloco key="app.column.regex.description" [params]="{regex101: 'https://regex101.com'}" />
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputMessage">{{'app.column.report_message' | transloco}}</label>
+              <textarea class="form-control" id="inputMessage" formControlName="message" aria-describedby="inputMessageDescription"></textarea>
+              <small id="inputMessageDescription">
+                <transloco key="app.column.report_message.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <app-checkbox formControlName="enabled" [label]="'app.column.enabled' | transloco" />
+              <small>
+                <transloco key="app.column.enabled.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <app-checkbox formControlName="private" [label]="'app.column.report_private' | transloco" />
+              <small>
+                <transloco key="app.column.report_private.description" />
+              </small>
+            </div>
+
+            <button class="btn btn-primary" type="submit" [disabled]="!form.valid">{{'app.save' | transloco}}</button>
+            @if (itemId()) {
+              &nbsp;
+              <button class="btn btn-danger" type="button" (click)="removeItem()">{{'app.remove' | transloco}}</button>
+            }
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+}

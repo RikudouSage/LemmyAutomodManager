@@ -161,4 +161,16 @@ export const routes: Routes = [
     path: 'ignored-posts/detail/:id',
     loadComponent: () => import('./ignored-posts/pages/ignored-posts-detail/ignored-posts-detail.component').then(m => m.IgnoredPostsDetailComponent),
   },
+  {
+    path: 'report-regexes',
+    loadComponent: () => import('./report-regexes/pages/report-regexes-list/report-regexes-list.component').then(m => m.ReportRegexesListComponent),
+  },
+  {
+    path: 'report-regexes/add',
+    loadComponent: () => import('./report-regexes/pages/report-regexes-detail/report-regexes-detail.component').then(m => m.ReportRegexesDetailComponent),
+  },
+  {
+    path: 'report-regexes/detail/:id',
+    loadComponent: () => import('./report-regexes/pages/report-regexes-detail/report-regexes-detail.component').then(m => m.ReportRegexesDetailComponent),
+  },
 ];

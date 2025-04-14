@@ -1,49 +1,49 @@
 import {Component, OnInit, signal} from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {BannedQrCode, BannedQrCodeRepository} from "../../../entity/banned-qr-code.entity";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TranslatorService} from "../../../services/translator.service";
 import {TitleService} from "../../../services/title.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {toPromise} from "../../../helper/resolvable";
 import {defaultDetailDeleteCallback, defaultSaveCallback} from "../../../helper/default-implementations";
-import {BannedQrCode, BannedQrCodeRepository} from "../../../entity/banned-qr-code.entity";
+import {ReportRegex, ReportRegexRepository} from "../../../entity/report-regex.entity";
 import {CheckboxComponent} from "../../../root/components/checkbox/checkbox.component";
 import {LoaderComponent} from "../../../root/components/loader/loader.component";
 import {TranslocoMarkupComponent} from "ngx-transloco-markup";
 import {TranslocoPipe} from "@jsverse/transloco";
 
 @Component({
-  selector: 'app-qr-code-bans-detail',
+  selector: 'app-report-regexes-detail',
   standalone: true,
   imports: [
     CheckboxComponent,
-    FormsModule,
     LoaderComponent,
     ReactiveFormsModule,
     TranslocoMarkupComponent,
     TranslocoPipe
   ],
-  templateUrl: './qr-code-bans-detail.component.html',
-  styleUrl: './qr-code-bans-detail.component.scss'
+  templateUrl: './report-regexes-detail.component.html',
+  styleUrl: './report-regexes-detail.component.scss'
 })
-export class QrCodeBansDetailComponent implements OnInit {
-  private item = signal<BannedQrCode | null>(null);
+export class ReportRegexesDetailComponent implements OnInit {
+  private item = signal<ReportRegex | null>(null);
 
   protected itemId = signal(0);
   protected loading = signal(true);
 
   protected form = new FormGroup({
     regex: new FormControl<string>('', [Validators.required]),
-    reason: new FormControl<string>(''),
+    message: new FormControl<string>('', [Validators.required]),
     enabled: new FormControl(true),
-    removeAll: new FormControl(true),
+    private: new FormControl(false),
   });
 
   constructor(
     private readonly translator: TranslatorService,
     private readonly titleService: TitleService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly repository: BannedQrCodeRepository,
+    private readonly repository: ReportRegexRepository,
     private readonly toastr: ToastrService,
     private readonly router: Router,
   ) {
@@ -54,13 +54,13 @@ export class QrCodeBansDetailComponent implements OnInit {
       this.itemId.set(Number(params['id'] as string | undefined ?? null));
 
       if (this.itemId()) {
-        this.titleService.title.set(await toPromise(this.translator.get('app.qr_code_bans.edit.title', {id: this.itemId()})));
+        this.titleService.title.set(await toPromise(this.translator.get('app.report_regexes.edit.title', {id: this.itemId()})));
         const item = await toPromise(this.repository.get(this.itemId()));
         this.form.patchValue(item.attributes);
         this.item.set(item);
       } else {
-        this.titleService.title.set(await toPromise(this.translator.get('app.qr_code_bans.add.title')));
-        this.item.set(new BannedQrCode(false))
+        this.titleService.title.set(await toPromise(this.translator.get('app.report_regexes.add.title')));
+        this.item.set(new ReportRegex(false))
       }
       this.loading.set(false);
     });
@@ -75,8 +75,8 @@ export class QrCodeBansDetailComponent implements OnInit {
       form => {
         this.item()!.attributes = {
           regex: form.value.regex!,
-          reason: form.value.reason ?? null,
-          removeAll: this.form.value.removeAll ?? false,
+          message: form.value.message!,
+          private: this.form.value.private ?? false,
           enabled: this.form.value.enabled ?? true,
         };
       },
@@ -84,7 +84,7 @@ export class QrCodeBansDetailComponent implements OnInit {
       this.repository,
       this.item,
       this.router,
-      `/qr-code-bans/detail/%id%`,
+      `/report-regexes/detail/%id%`,
     )();
   }
 
@@ -94,7 +94,7 @@ export class QrCodeBansDetailComponent implements OnInit {
       this.repository,
       this.item,
       this.router,
-      '/qr-code-bans',
+      '/report-regexes',
       this.toastr,
       this.translator,
     )();
