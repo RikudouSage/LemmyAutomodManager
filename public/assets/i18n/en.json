@@ -26,6 +26,8 @@
   "app.new_version_available.ui": "There's a new version of the Automod Manager available, tap this notification to open the repository.",
   "app.new_version_available.api": "There's a new version of the Automod available, tap this notification to open the repository.",
 
+  "app.data_list_table.filter_field": "Filter {{name}}",
+
   "app.error": "Error",
   "app.error.invalid_form": "The form is not valid.",
   "app.error.failed_saving": "There was an error while saving the item, please try again later.",

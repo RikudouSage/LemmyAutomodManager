@@ -22,6 +22,9 @@
           detailUrl="/community-remove-regexes/detail/%value%"
           [deleteCallback]="deleteItemCallback()"
           [columnNames]="{banModerators: 'app.column.ban_moderators' | transloco}"
+          [filters]="{
+            banModerators: FilterTypes.Boolean,
+          }"
 
           (totalCountResolved)="totalCount.set($event)"
         />

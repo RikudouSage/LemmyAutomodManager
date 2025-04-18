@@ -1,0 +1,9 @@
+@if (isBoolean()) {
+  <select class="form-control-sm" (change)="value.set(type()(self.value))" #self>
+    <option value="null" [selected]="value() === null">---</option>
+    <option value="true" [selected]="value() === true">{{'app.yes' | transloco}}</option>
+    <option value="false" [selected]="value() === false">{{'app.no' | transloco}}</option>
+  </select>
+} @else {
+  <input [type]="inputType()" class="form-control-sm" [placeholder]="label()" (input)="value.set(type()(self.value))" [value]="value()" #self />
+}

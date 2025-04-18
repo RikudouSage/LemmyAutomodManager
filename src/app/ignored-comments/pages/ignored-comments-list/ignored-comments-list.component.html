@@ -24,6 +24,9 @@
           [columnNames]="{
             commentId: 'app.column.comment_id' | transloco,
           }"
+          [filters]="{
+            commentId: FilterTypes.Number,
+          }"
 
           (totalCountResolved)="totalCount.set($event)"
         />

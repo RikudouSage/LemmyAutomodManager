@@ -15,6 +15,7 @@ import {RouterLink} from "@angular/router";
 import {TranslocoMarkupComponent} from "ngx-transloco-markup";
 import {TranslocoPipe} from "@jsverse/transloco";
 import {IgnoredPostRepository} from "../../../entity/ignored-post.entity";
+import {FilterTypes} from "../../../root/components/data-list-table/filter-types.data-list-table";
 
 @Component({
   selector: 'app-ignored-posts-list',
@@ -30,6 +31,8 @@ import {IgnoredPostRepository} from "../../../entity/ignored-post.entity";
   styleUrl: './ignored-posts-list.component.scss'
 })
 export class IgnoredPostsListComponent implements OnInit {
+  protected readonly FilterTypes = FilterTypes;
+
   protected deleteItemCallback: WritableSignal<DeleteCallback<AbstractEntity>>;
   protected totalCount = signal(0);
 
