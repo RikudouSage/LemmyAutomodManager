@@ -26,6 +26,11 @@
             instance: 'app.column.instance' | transloco,
             userId: 'app.column.user_id' | transloco,
           }"
+          [filters]="{
+            username: FilterTypes.String,
+            instance: FilterTypes.String,
+            userId: FilterTypes.Number,
+          }"
 
           (totalCountResolved)="totalCount.set($event)"
         />

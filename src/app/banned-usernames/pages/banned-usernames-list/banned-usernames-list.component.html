@@ -22,6 +22,9 @@
           detailUrl="/banned-usernames/detail/%value%"
           [deleteCallback]="deleteItemCallback()"
           [columnNames]="{username: 'app.column.regex' | transloco}"
+          [filters]="{
+            username: FilterTypes.String,
+          }"
 
           (totalCountResolved)="totalCount.set($event)"
         />

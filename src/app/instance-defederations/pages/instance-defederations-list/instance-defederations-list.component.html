@@ -31,6 +31,16 @@
             evidence: 'app.column.defederate_evidence' | transloco,
             reason: 'app.column.defederate_reason' | transloco,
           }"
+          [filters]="{
+            allowOpenRegistrations: FilterTypes.Boolean,
+            allowOpenRegistrationsWithCaptcha: FilterTypes.Boolean,
+            allowOpenRegistrationsWithEmailVerification: FilterTypes.Boolean,
+            allowOpenRegistrationsWithApplication: FilterTypes.Boolean,
+            treatMissingDataAs: FilterTypes.Boolean,
+            minimumVersion: FilterTypes.String,
+            evidence: FilterTypes.String,
+            reason: FilterTypes.String,
+          }"
 
           (totalCountResolved)="totalCount.set($event)"
         />

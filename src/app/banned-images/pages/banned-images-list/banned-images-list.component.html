@@ -26,6 +26,11 @@
             description: 'app.column.description' | transloco,
             imageHash: 'app.column.image_hash' | transloco,
           }"
+          [filters]="{
+            similarityPercent: FilterTypes.Number,
+            description: FilterTypes.String,
+            imageHash: FilterTypes.String,
+          }"
 
           (totalCountResolved)="totalCount.set($event)"
         />

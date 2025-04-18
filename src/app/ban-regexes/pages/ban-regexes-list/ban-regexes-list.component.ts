@@ -8,7 +8,7 @@ import {
   DataListTableComponent,
   DeleteCallback
 } from "../../../root/components/data-list-table/data-list-table.component";
-import {InstanceBanRegex, InstanceBanRegexRepository} from "../../../entity/instance-ban-regex.entity";
+import {InstanceBanRegexRepository} from "../../../entity/instance-ban-regex.entity";
 import {FormatNumberPipe} from "../../../pipes/format-number.pipe";
 import {RouterLink} from "@angular/router";
 import {ToastrService} from "ngx-toastr";

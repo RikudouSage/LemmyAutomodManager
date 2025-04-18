@@ -15,6 +15,7 @@ import {FormatNumberPipe} from "../../../pipes/format-number.pipe";
 import {RouterLink} from "@angular/router";
 import {TranslocoMarkupComponent} from "ngx-transloco-markup";
 import {TranslocoPipe} from "@jsverse/transloco";
+import {FilterTypes} from "../../../root/components/data-list-table/filter-types.data-list-table";
 
 @Component({
   selector: 'app-trusted-users-list',
@@ -30,6 +31,8 @@ import {TranslocoPipe} from "@jsverse/transloco";
   styleUrl: './trusted-users-list.component.scss'
 })
 export class TrustedUsersListComponent implements OnInit {
+  protected readonly FilterTypes = FilterTypes;
+
   protected deleteItemCallback: WritableSignal<DeleteCallback<AbstractEntity>>;
   protected totalCount = signal(0);
 

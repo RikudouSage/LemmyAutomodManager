@@ -24,6 +24,9 @@
           [columnNames]="{
             postId: 'app.column.post_id' | transloco,
           }"
+          [filters]="{
+            postId: FilterTypes.Number,
+          }"
 
           (totalCountResolved)="totalCount.set($event)"
         />

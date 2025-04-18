@@ -1,21 +1,37 @@
 @if (loading()) {
   <app-loader/>
-} @else if (!items().length) {
+} @else if (!items().length && !headers().length) {
   <p>{{'app.no_items' | transloco}}</p>
 } @else {
   <div class="table-container">
+    <form [formGroup]="filterForm">
     <table class="table">
       <thead>
-      <tr>
-        @for (header of headers(); track header) {
-          <th>
-            {{ allColumnNames()[header] ?? header }}
-          </th>
+        <tr>
+          @for (header of headers(); track header) {
+            <th>
+              {{ allColumnNames()[header] ?? header }}
+            </th>
+          }
+          @if (deleteCallback()) {
+            <th>{{ 'app.actions' | transloco }}</th>
+          }
+        </tr>
+        @if (filtersAvailable() && (allFilters() | keyvalue).length) {
+          <tr>
+            @for (header of headers(); track header) {
+              <td>
+                @if (allFilters()[header]; as filter) {
+                  <app-data-list-table-filter-field
+                    [type]="filter"
+                    [label]="'app.data_list_table.filter_field' | transloco:{name: allColumnNames()[header] ?? header}"
+                    [formControlName]="header"
+                  />
+                }
+              </td>
+            }
+          </tr>
         }
-        @if (deleteCallback()) {
-          <th>{{ 'app.actions' | transloco }}</th>
-        }
-      </tr>
       </thead>
       <tbody>
         @for (item of items(); track item.id) {
@@ -44,9 +60,16 @@
               </td>
             }
           </tr>
+        } @empty {
+          <tr>
+            <td [colSpan]="headers().length + (deleteCallback() ? 1 : 0)">
+              {{'app.no_items' | transloco}}
+            </td>
+          </tr>
         }
       </tbody>
     </table>
+    </form>
   </div>
 
 

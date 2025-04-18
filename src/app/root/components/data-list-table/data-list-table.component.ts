@@ -2,7 +2,7 @@ import {Component, computed, effect, input, OnInit, output, Signal, signal} from
 import {AbstractRepository} from "../../../services/json-api/abstract.repository";
 import {AbstractEntity} from "../../../services/json-api/abstract.entity";
 import {toPromise} from "../../../helper/resolvable";
-import {tap} from "rxjs";
+import {debounceTime, Subscription, tap} from "rxjs";
 import {map} from "rxjs/operators";
 import {LoaderComponent} from "../loader/loader.component";
 import {TranslatorService} from "../../../services/translator.service";
@@ -10,6 +10,13 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {DisplayDatabaseValuePipe} from "../../../pipes/display-database-value.pipe";
 import {TranslocoPipe} from "@jsverse/transloco";
 import {GetTypeofPipe} from "../../../pipes/get-typeof.pipe";
+import {FilterType, FilterTypes} from "./filter-types.data-list-table";
+import {JsonPipe, KeyValuePipe} from "@angular/common";
+import {DataListTableFilterFieldComponent} from "./filter-field/data-list-table-filter-field.component";
+import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {nonEmptyObject, shallowEqual} from "../../../helper/object.helper";
+import {NewVersionCheckerService} from "../../../services/new-version-checker.service";
+import {Feature, IsFeatureAvailable} from "../../../helper/feature-map";
 
 export type DeleteCallback<T extends AbstractEntity> = (item: T) => Promise<boolean>;
 
@@ -21,7 +28,11 @@ export type DeleteCallback<T extends AbstractEntity> = (item: T) => Promise<bool
     RouterLink,
     DisplayDatabaseValuePipe,
     TranslocoPipe,
-    GetTypeofPipe
+    GetTypeofPipe,
+    KeyValuePipe,
+    DataListTableFilterFieldComponent,
+    ReactiveFormsModule,
+    JsonPipe
   ],
   templateUrl: './data-list-table.component.html',
   styleUrl: './data-list-table.component.scss'
@@ -30,8 +41,11 @@ export class DataListTableComponent implements OnInit {
   private readonly perPage = 30;
   private readonly paginationSpaceAround = 2;
 
+  private cachedHeaders: string[] | null = null;
   private defaultColumnNames = signal<Record<string, string>>({});
   protected allColumnNames: Signal<Record<string, string | undefined>> = computed(() => ({...this.defaultColumnNames(), ...this.columnNames()}));
+  private defaultFilters = signal<Record<string, FilterType>>({});
+  protected allFilters = computed(() => ({...this.defaultFilters(), ...this.filters()}));
 
   public repository = input.required<AbstractRepository<AbstractEntity>>();
   public identifierField = input.required<string>();
@@ -39,6 +53,8 @@ export class DataListTableComponent implements OnInit {
   public hiddenColumns = input<string[]>([]);
   public columnNames = input<Record<string, string>>({});
   public deleteCallback = input<DeleteCallback<AbstractEntity> | null>(null);
+  public filters = input<Record<string, FilterType>>({});
+  public filtersAvailable = signal(false);
 
   public loadingChanged = output<boolean>();
   public totalCountResolved = output<number>();
@@ -50,6 +66,22 @@ export class DataListTableComponent implements OnInit {
   protected currentPage = signal(1);
   protected prevPageAvailable = computed(() => this.currentPage() > 1);
   protected nextPageAvailable = computed(() => this.currentPage() < this.lastPage());
+  protected apiFilters = signal<Record<string, unknown>>({});
+  protected normalizedApiFilters = computed(() => {
+    const result: Record<string, string> = {};
+    for (const [key, value] of Object.entries(this.apiFilters())) {
+      if (typeof value === 'string') {
+        result[key] = `~${value}`;
+      } else if (typeof value === 'boolean') {
+        result[key] = value ? 'true' : 'false';
+      } else if (typeof value === 'number') {
+        result[key] = String(value);
+      }
+    }
+    return result;
+  });
+
+  protected filterForm: FormGroup<Record<string, FormControl>> = new FormGroup({});
 
   public currentUrl = signal<string>('');
   public previousPageHref = computed(() => {
@@ -112,6 +144,10 @@ export class DataListTableComponent implements OnInit {
     });
   });
   protected headers = computed(() => {
+    if (this.cachedHeaders !== null) {
+      return this.cachedHeaders;
+    }
+
     const result: string[] = [];
 
     if (!this.items().length) {
@@ -121,6 +157,7 @@ export class DataListTableComponent implements OnInit {
     result.push('id');
     result.push(...Object.keys(this.items()[0].attributes));
 
+    this.cachedHeaders = result;
     return result;
   });
 
@@ -128,6 +165,7 @@ export class DataListTableComponent implements OnInit {
     private readonly translator: TranslatorService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
+    private readonly currentVersionChecker: NewVersionCheckerService,
   ) {
     effect(() => {
       this.loadingChanged.emit(this.loading());
@@ -136,12 +174,13 @@ export class DataListTableComponent implements OnInit {
       this.totalCountResolved.emit(this.totalCount());
     });
 
-
     const urlTree = router.parseUrl(router.url);
     this.currentUrl.set(`/${urlTree.root.children['primary']?.segments.map(segment => segment.path).join('/')}`);
   }
 
   public async ngOnInit(): Promise<void> {
+    this.filtersAvailable.set(IsFeatureAvailable(Feature.Filters, await this.currentVersionChecker.getCurrentApiVersion()));
+
     const defaultColumnNames = {
       id: 'app.column.id',
       regex: 'app.column.regex',
@@ -149,26 +188,25 @@ export class DataListTableComponent implements OnInit {
       enabled: 'app.column.enabled',
       removeAll: 'app.column.remove_all',
     };
+    const defaultFilters: Record<keyof typeof defaultColumnNames, FilterType> = {
+      id: FilterTypes.Number,
+      regex: FilterTypes.String,
+      reason: FilterTypes.String,
+      enabled: FilterTypes.Boolean,
+      removeAll: FilterTypes.Boolean,
+    };
 
     for (const columnName of Object.keys(defaultColumnNames) as (keyof typeof defaultColumnNames)[]) {
       defaultColumnNames[columnName] = await toPromise(this.translator.get(defaultColumnNames[columnName]));
     }
     this.defaultColumnNames.set(defaultColumnNames);
+    this.defaultFilters.set(defaultFilters);
 
     this.activatedRoute.queryParams.subscribe(async query => {
       this.loading.set(true);
 
       this.currentPage.set(Number(query['page'] ?? 1));
-
-      this.items.set(await toPromise(
-        this.repository().collection({
-          page: this.currentPage(),
-          maxResults: this.perPage,
-        }).pipe(
-          tap(collection => this.totalCount.set(collection.totalItems)),
-          map(collection => collection.toArray()),
-        )
-      ));
+      await this.loadCurrentPage();
 
       this.loading.set(false);
     });
@@ -202,12 +240,55 @@ export class DataListTableComponent implements OnInit {
       queryParams[name] = value;
     });
 
-    console.log(queryParams)
-
     await this.router.navigate(['.'], {
       relativeTo: this.activatedRoute,
       queryParams: queryParams,
       queryParamsHandling: 'merge',
     });
+  }
+
+  private async loadCurrentPage(): Promise<void> {
+    this.items.set(await toPromise(
+      this.repository().collection({
+        page: this.currentPage(),
+        maxResults: this.perPage,
+        filters: this.filtersAvailable() ? this.normalizedApiFilters() : {},
+      }).pipe(
+        tap(collection => this.totalCount.set(collection.totalItems)),
+        map(collection => collection.toArray()),
+      )
+    ));
+
+    if (Object.keys(this.filterForm.controls).length === 0) {
+      this.filterForm = new FormGroup({});
+      for (const header of this.headers()) {
+        const filter = this.allFilters()[header] ?? null;
+        if (filter === null) {
+          continue;
+        }
+
+        this.filterForm.addControl(header, new FormControl(null));
+      }
+      this.filterForm.valueChanges.pipe(
+        debounceTime(300),
+      ).subscribe(value => {
+        if (typeof window === 'undefined') {
+          return;
+        }
+        const filter = nonEmptyObject(value);
+        if (shallowEqual(filter, this.apiFilters())) {
+          return;
+        }
+        this.apiFilters.set(filter);
+
+        if (this.currentPage() !== 1) {
+          this.navigateToPage(1, new MouseEvent('click'));
+        } else {
+          this.loadCurrentPage().then(() => {
+            this.loading.set(false);
+          });
+        }
+      });
+    }
   }
 }
