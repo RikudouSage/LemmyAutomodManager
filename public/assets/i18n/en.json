@@ -89,6 +89,16 @@
   "app.column.defederate_reason.description": "The reason for this defederation. It will be added to your censures on Fediseer. Has no effect if Fediseer integration is not enabled.",
   "app.column.defederate_evidence": "Evidence",
   "app.column.defederate_evidence.description": "The evidence for the reasons you specified. It will be added to your censures on Fediseer. Has no effect if Fediseer integration is not enabled.",
+  "app.column.url": "URL",
+  "app.column.url.description": "The URL of the external list",
+  "app.column.delimiter": "Delimiter",
+  "app.column.delimiter.description": "The delimiter to use for splitting into items.",
+  "app.column.name": "Name",
+  "app.column.name.description": "The name of the item.",
+  "app.column.append": "Append",
+  "app.column.append.description": "A string to append after each item.",
+  "app.column.prepend": "Prepend",
+  "app.column.prepend.description": "A string to prepend before each item.",
 
   "app.stats.name": "Stats & config",
   "app.stats.in_queue": "Jobs to process",
@@ -174,6 +184,11 @@
   "app.report_regexes.description": "Posts and comments matching any of the regexes below will be reported with the message you set. You can choose to report using the Lemmy reporting system or privately using your notification channels. The same fields as for [b][link:banRegexesLink]{{app.ban_regexes.name}}[/link][/b] is used.",
   "app.report_regexes.edit.title": "Edit report regex with id '{{id}}'",
   "app.report_regexes.add.title": "Add report regex",
+
+  "app.external_lists.name": "External lists",
+  "app.external_lists.description": "External regex lists that will be fetched from a URL and can be used in custom rules.",
+  "app.external_lists.edit.title": "Edit external list with id '{{id}}'",
+  "app.external_lists.add.title": "Add external list",
 
   "app.instance_defederations.name": "Instance defederations",
   "app.instance_defederations.description": "[p]Configures rules to preemptively defederate if a new instance federates with you and matches any of the criteria below. If you don't specify a software, the rule will be matched for every single software. Note that not all information is available for every software so be careful.[/p][p]To get more than just basic information (software, version, open registrations), there needs to be a manually created [b]enricher[/b] which fetches additional data. Currently there are enrichers for: [b]Lemmy[/b], [b]Mastodon[/b] / [b]Pixelfed[/b] / [b]Akkoma[/b], [b]Misskey[/b], [b]Pleroma[/b].",

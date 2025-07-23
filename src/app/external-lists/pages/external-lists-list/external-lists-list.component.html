@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">{{'app.description' | transloco}}</h3>
+      </div>
+      <div class="card-body">
+        <transloco key="app.external_lists.description" [params]="{banRegexesLink: {route: '/ban-regexes'}}" />
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <h3 class="card-title flex-grow-1">{{'app.items' | transloco}} ({{totalCount() | formatNumber}})</h3>
+        <div class="flex-grow-0"><a routerLink="/external-lists/add">{{'app.add_new' | transloco}}</a></div>
+      </div>
+      <div class="card-body">
+        <app-data-list-table
+          [repository]="repository"
+          identifierField="id"
+          detailUrl="/external-lists/detail/%value%"
+          [deleteCallback]="deleteItemCallback()"
+          [columnNames]="{
+            url: 'app.column.url' | transloco,
+            delimiter: 'app.column.delimiter' | transloco,
+            name: 'app.column.name' | transloco,
+            prepend: 'app.column.prepend' | transloco,
+            append: 'app.column.append' | transloco,
+          }"
+          [filters]="{
+            url: FilterTypes.String,
+            delimiter: FilterTypes.String,
+            name: FilterTypes.String,
+            prepend: FilterTypes.String,
+            append: FilterTypes.String,
+          }"
+
+          (totalCountResolved)="totalCount.set($event)"
+        />
+      </div>
+    </div>
+  </div>
+</div>

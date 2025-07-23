@@ -185,4 +185,16 @@ export const routes: Routes = [
     path: 'instance-defederations/detail/:id',
     loadComponent: () => import('./instance-defederations/pages/instance-defederations-detail/instance-defederations-detail.component').then(m => m.InstanceDefederationsDetailComponent),
   },
+  {
+    path: 'external-lists',
+    loadComponent: () => import('./external-lists/pages/external-lists-list/external-lists-list.component').then(m => m.ExternalListsListComponent),
+  },
+  {
+    path: 'external-lists/add',
+    loadComponent: () => import('./external-lists/pages/external-list-detail/external-list-detail.component').then(m => m.ExternalListDetailComponent),
+  },
+  {
+    path: 'external-lists/detail/:id',
+    loadComponent: () => import('./external-lists/pages/external-list-detail/external-list-detail.component').then(m => m.ExternalListDetailComponent),
+  },
 ];
