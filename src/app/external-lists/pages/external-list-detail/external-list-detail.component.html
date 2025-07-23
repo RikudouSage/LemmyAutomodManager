@@ -1,0 +1,55 @@
+@if (loading()) {
+  <app-loader />
+} @else {
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="form-group">
+              <label for="inputName">{{'app.column.name' | transloco}}</label>
+              <input class="form-control" id="inputName" formControlName="name" aria-describedby="inputNameDescription" />
+              <small id="inputRegexDescription">
+                <transloco key="app.column.name.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputDelimiter">{{'app.column.delimiter' | transloco}}</label>
+              <textarea class="form-control" id="inputDelimiter" formControlName="delimiter" aria-describedby="inputDelimiterDescription"></textarea>
+              <small id="inputDelimiterDescription">
+                <transloco key="app.column.delimiter.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputUrl">{{'app.column.url' | transloco}}</label>
+              <input class="form-control" id="inputUrl" formControlName="url" aria-describedby="inputUrlDescription" type="url" />
+              <small id="inputUrlDescription">
+                <transloco key="app.column.url.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputAppend">{{'app.column.append' | transloco}}</label>
+              <input class="form-control" id="inputAppend" formControlName="append" aria-describedby="inputAppendDescription" />
+              <small id="inputAppendDescription">
+                <transloco key="app.column.append.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputPrepend">{{'app.column.prepend' | transloco}}</label>
+              <input class="form-control" id="inputPrepend" formControlName="prepend" aria-describedby="inputPrependDescription" />
+              <small id="inputPrependDescription">
+                <transloco key="app.column.prepend.description" />
+              </small>
+            </div>
+
+            <button class="btn btn-primary" type="submit" [disabled]="!form.valid">{{'app.save' | transloco}}</button>
+            @if (itemId()) {
+              &nbsp;
+              <button class="btn btn-danger" type="button" (click)="removeItem()">{{'app.remove' | transloco}}</button>
+            }
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+}

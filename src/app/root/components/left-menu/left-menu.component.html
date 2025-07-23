@@ -21,4 +21,7 @@
   <app-nav-item class="nav-item" link="/ignored-comments" icon="fa-comment-slash" [title]="'app.ignored_comments.name' | transloco" />
   <app-nav-item class="nav-item" link="/ignored-posts" icon="fa-file-alt" [title]="'app.ignored_posts.name' | transloco" />
   <app-nav-item class="nav-item" link="/instance-defederations" icon="fa-ban" [title]="'app.instance_defederations.name' | transloco" />
+  @if (externalListsEnabled()) {
+    <app-nav-item class="nav-item" link="/external-lists" icon="fa-list" [title]="'app.external_lists.name' | transloco" />
+  }
 </ul>
