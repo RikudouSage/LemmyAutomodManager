@@ -22,7 +22,14 @@ export class LeftMenuComponent implements OnInit {
     }
 
     return IsFeatureAvailable(Feature.ExternalLists, this.currentApiVersion()!);
-  })
+  });
+  protected readonly complexRulesEnabled = computed(() => {
+    if (!this.currentApiVersion()) {
+      return false;
+    }
+
+    return IsFeatureAvailable(Feature.ComplexRules, this.currentApiVersion()!);
+  });
 
   constructor(
     private newVersionChecker: NewVersionCheckerService,

@@ -20,6 +20,7 @@
   "app.users": "Users",
   "app.miscellaneous": "Miscellaneous",
   "app.software": "Software",
+  "app.complex_rules": "Complex rules",
 
   "app.info.user_id_username_instance_mix_info": "In the form below you can fill out the [b]username[/b], [b]instance[/b] and [b]user id[/b], but you don't have to fill out all of them. The only field needed is the [b]user id[/b], but if you don't want to look it up, you can fill out [b]both username and instance[/b] and the user id will be fetched automatically when the rule is evaluated.",
 
@@ -99,6 +100,14 @@
   "app.column.append.description": "A string to append after each item.",
   "app.column.prepend": "Prepend",
   "app.column.prepend.description": "A string to prepend before each item.",
+  "app.column.type": "Type",
+  "app.column.type.description": "The type of object this complex rule is evaluated against.",
+  "app.column.rule": "Rule",
+  "app.column.rule.description": "The rule that will be evaluated - if it evaluates to true, the expression in the {{app.column.actions}} column will run.",
+  "app.column.actions": "Actions",
+  "app.column.actions.description": "The actions that will run on the object if the expression in {{app.column.rule}} evaluates to true.",
+  "app.column.runConfiguration": "Run configuration",
+  "app.column.runConfiguration.description": "Configures whether the rule will run always or only when previous rules did not already abort it.",
 
   "app.stats.name": "Stats & config",
   "app.stats.in_queue": "Jobs to process",
@@ -204,5 +213,10 @@
   "app.instance_defederations.supported_data.captcha": "Captcha",
   "app.instance_defederations.supported_data.email_verification": "Email verification",
   "app.instance_defederations.supported_data.applications": "Registration applications",
-  "app.instance_defederations.enriched_data.other_software": "All other software"
+  "app.instance_defederations.enriched_data.other_software": "All other software",
+
+  "app.complex_rules.name": "{{app.complex_rules}}",
+  "app.complex_rules.description": "Lists custom complex expression that will be evaluated against incoming events.",
+  "app.complex_rules.edit.title": "Edit complex rule with id '{{id}}'",
+  "app.complex_rules.add.title": "Add a complex rule"
 }

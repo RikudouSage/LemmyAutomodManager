@@ -1,0 +1,62 @@
+@if (loading()) {
+  <app-loader />
+} @else {
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="form-group">
+              <label for="inputType">{{'app.column.type' | transloco}}</label>
+              <select class="form-control" id="inputName" formControlName="type" aria-describedby="inputTypeDescription">
+                @for (pair of ComplexRuleType | keyvalue; track pair) {
+                  <option [value]="pair.value">{{pair.value}}</option>
+                }
+              </select>
+              <small id="inputTypeDescription">
+                <transloco key="app.column.type.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputRule">{{'app.column.rule' | transloco}}</label>
+              <textarea class="form-control" id="inputRule" formControlName="rule" aria-describedby="inputRuleDescription"></textarea>
+              <small id="inputRuleDescription">
+                <transloco key="app.column.rule.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputActions">{{'app.column.actions' | transloco}}</label>
+              <textarea class="form-control" id="inputActions" formControlName="actions" aria-describedby="inputActionsDescription"></textarea>
+              <small id="inputActionsDescription">
+                <transloco key="app.column.actions.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputRunConfiguration">{{'app.column.runConfiguration' | transloco}}</label>
+              <select class="form-control" id="inputRunConfiguration" formControlName="runConfiguration" aria-describedby="inputRunConfigurationDescription">
+                @for (pair of RunConfiguration | keyvalue; track pair) {
+                  <option [value]="pair.value">{{pair.value}}</option>
+                }
+              </select>
+              <small id="inputRunConfigurationDescription">
+                <transloco key="app.column.runConfiguration.description" />
+              </small>
+            </div>
+            <div class="form-group">
+              <app-checkbox formControlName="enabled" [label]="'app.column.enabled' | transloco" />
+              <small>
+                <transloco key="app.column.enabled.description" />
+              </small>
+            </div>
+
+            <button class="btn btn-primary" type="submit" [disabled]="!form.valid">{{'app.save' | transloco}}</button>
+            @if (itemId()) {
+              &nbsp;
+              <button class="btn btn-danger" type="button" (click)="removeItem()">{{'app.remove' | transloco}}</button>
+            }
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+}

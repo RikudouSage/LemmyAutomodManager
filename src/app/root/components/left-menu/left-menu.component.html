@@ -16,12 +16,19 @@
   <app-nav-item class="nav-item" link="/trusted-users" icon="fa-user-shield" [title]="'app.trusted_users.name' | transloco" />
   <app-nav-item class="nav-item" link="/ignored-users" icon="fa-user-secret" [title]="'app.ignored_users.name' | transloco" />
 
+  @if (externalListsEnabled() || complexRulesEnabled()) {
+    <li class="nav-header">{{'app.complex_rules' | transloco}}</li>
+  }
+  @if (complexRulesEnabled()) {
+    <app-nav-item class="nav-item" link="/complex-rules" icon="fa-puzzle-piece" [title]="'app.complex_rules' | transloco" />
+  }
+  @if (externalListsEnabled()) {
+    <app-nav-item class="nav-item" link="/external-lists" icon="fa-list" [title]="'app.external_lists.name' | transloco" />
+  }
+
   <li class="nav-header">{{'app.miscellaneous' | transloco}}</li>
   <app-nav-item class="nav-item" link="/auto-approval" icon="fa-user-check" [title]="'app.auto_approval.name' | transloco" />
   <app-nav-item class="nav-item" link="/ignored-comments" icon="fa-comment-slash" [title]="'app.ignored_comments.name' | transloco" />
   <app-nav-item class="nav-item" link="/ignored-posts" icon="fa-file-alt" [title]="'app.ignored_posts.name' | transloco" />
   <app-nav-item class="nav-item" link="/instance-defederations" icon="fa-ban" [title]="'app.instance_defederations.name' | transloco" />
-  @if (externalListsEnabled()) {
-    <app-nav-item class="nav-item" link="/external-lists" icon="fa-list" [title]="'app.external_lists.name' | transloco" />
-  }
 </ul>
