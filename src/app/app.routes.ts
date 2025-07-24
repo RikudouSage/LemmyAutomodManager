@@ -197,4 +197,16 @@ export const routes: Routes = [
     path: 'external-lists/detail/:id',
     loadComponent: () => import('./external-lists/pages/external-list-detail/external-list-detail.component').then(m => m.ExternalListDetailComponent),
   },
+  {
+    path: 'complex-rules',
+    loadComponent: () => import('./complex-rules/pages/complex-rule-list/complex-rule-list.component').then(m => m.ComplexRuleListComponent),
+  },
+  {
+    path: 'complex-rules/add',
+    loadComponent: () => import('./complex-rules/pages/complex-rule-detail/complex-rule-detail.component').then(m => m.ComplexRuleDetailComponent),
+  },
+  {
+    path: 'complex-rules/detail/:id',
+    loadComponent: () => import('./complex-rules/pages/complex-rule-detail/complex-rule-detail.component').then(m => m.ComplexRuleDetailComponent),
+  },
 ];
